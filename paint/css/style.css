@@ -1,0 +1,12 @@
+body{
+  width: 80%;
+  margin: auto;
+}
+
+header{
+  text-align: center;
+  margin: 0 0px 20px 0px;
+}
+#paint-header{
+  text-align: center;
+}

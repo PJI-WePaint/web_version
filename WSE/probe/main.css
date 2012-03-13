@@ -1,0 +1,374 @@
+
+/* Feuille de style de la page de gestion web des périphériques DMA */
+
+body {
+
+	height: 100%;
+	margin: 0;
+	margin-top: 10px;
+	font: 90% "Trebuchet MS", sans-serif;
+	background-color: #ededed;/* #673223;*/
+}
+
+div#content {
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px; 
+	min-height: 100%;
+	width: 750px;
+	padding: 10px;
+	margin: 0 auto; /* marges auto pour centrer le contenu */
+	margin-bottom: 10px;
+	position: relative;
+	background: url(pictures/fond.png) center repeat-y;
+    border-color: #6eb0e9;
+}
+
+div#header {
+	text-align: center;
+	height: 100px;
+	position: relative;
+	background: #084566;
+	color:#ffffff;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top:10px;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+}
+
+div#header h1 {
+	padding-top: 25px;
+}
+
+
+div#menu {
+	position:relative;	
+	float: left;
+	width: 130px;
+	height: 600px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;	
+}
+div#menu a{
+	text-decoration: none;
+}
+
+div#menu a:hover{
+	color:#72e0fb;
+}
+
+div#menu dt{
+	display:none;
+	border-bottom: white;
+	border-bottom-width: 2px;
+	border-bottom-style:solid;
+}
+
+div#menu ul{
+	list-style: none;
+	text-decoration: none;
+	margin:0;
+	padding:0;
+}
+
+div#menu dl dd {
+	margin:0;
+	padding:0;
+	display: none;
+}
+
+div#menu li{	
+	border-bottom: white;
+	border-bottom-width: 2px;
+	border-bottom-style:solid;
+	height: 30px;
+	padding-top: 10px;
+}
+div#accueil{
+	display:block;
+	background-color: #e2e2e2;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+div#accueil a{
+	font-family:"Britannic Bold";
+	font-size:medium;
+	font-style: italic;
+	color:#0259a1;
+}
+
+div#objects{
+	display:block;
+	background-color: #e2e2e2;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+}
+
+
+div#objects dt#titre_objets{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display:block;
+}
+
+div#objects dt#titre_objets a{
+	font-family:"Britannic Bold";
+	font-size:medium;
+	font-style: italic;
+	color:#0259a1;
+}
+
+div#objects dl:hover dd {
+	display:block;
+}
+
+div#actions{
+	display:block;
+	background-color: #e2e2e2;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+}
+
+div#actions dt#titre_actions{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display:block;
+}
+
+div#actions dt#titre_actions a{
+	font-family:"Britannic Bold";
+	font-size:medium;
+	font-style: italic;
+	color:#0259a1;
+}
+
+div#actions dl:hover dd {
+	display:block;
+}
+
+div#locations{
+	display:block;
+	background-color: #e2e2e2;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+}
+
+div#locations dt#titre_lieux{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display:block;
+}
+
+div#locations dt#titre_lieux a{
+	font-family:"Britannic Bold";
+	font-size:medium;
+	font-style: italic;
+	color:#0259a1;
+}
+
+div#locations dl:hover dd {
+	display:block;
+}
+
+div#perifs {
+	float:center;
+	position: relative; 
+	padding-bottom: 65px;
+	overflow: auto;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	height:535px;
+	
+	background: #ddecf0;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+
+}
+
+
+div#perifs h2 { 
+	color: #ffffff; 	
+	background: #006fc6;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 5px;
+	padding-top: 5px;	
+	text-align: center;
+	height: auto;
+	position: relative;
+	-moz-border-radius : 10px;
+	-webkit-border-radius : 10px; 
+	-webkit-box-shadow: 8px 8px 12px #aaa;
+	margin-left: 50px;
+	margin-right: 50px;
+	 
+}
+
+div#perifs p{
+	text-align: center;
+	font-family: "Times";
+	font-size:large;
+	margin-top:100px;
+	margin-left:40px;
+	margin-right: 60px;
+}
+
+div#perifs div{
+	position : relative;
+	margin-right: 50px;
+	
+	margin-top: 40px;
+	float:left;
+	text-align: center;
+	color: #0259a1;
+}
+
+div#perifs img{
+	margin-bottom :10px;
+	margin-right: 30px;
+	margin-left: 30px;
+}
+
+
+div#webcam {
+	margin-left: 10px;
+	position: relative;
+}
+
+div#webcam img{
+	margin-left: 50px;
+	margin-top:60px;
+	float:left;
+	position : relative;
+}
+div#boutons_cam{
+	position : relative;
+
+}
+button#hautCam {
+	position:relative;
+	margin-left: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 8px;
+	padding-right: 13px;
+	padding-left: 13px;
+	
+}
+button#basCam {
+	position:relative;
+	margin-left: 10px;
+	margin-top:5px;
+	padding: 8px;
+	padding-left: 14px;
+	padding-right: 19px;
+}
+button#homeCam {
+	position:relative;
+	padding: 10px;
+	padding-bottom: 8px;
+	padding-top: 8px;
+	
+}
+button#gaucheCam {
+	position:relative;
+	padding: 8px;
+	
+}
+button#droiteCam {
+	position:relative;
+	padding: 8px;
+	
+}
+
+
+div#ventilateur {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+}
+
+div#ventilateur img{
+	margin-left: 110px;
+	margin-top: 30px;
+	float : left;
+}
+
+div#boutons_vent{
+	position : relative;
+
+}
+
+button#onVent{
+	padding: 8px;
+}
+
+button#offVent{
+	padding: 8px;
+}
+
+
+
+div#lampe {
+	position : relative;
+	
+}
+
+
+div#lampe img{
+	position:relative;
+	margin-top: 30px;
+	margin-left: 110px;
+	float: left;
+		
+}
+
+
+div#boutons_lamp{
+	position : relative;
+	float : right;
+
+}
+
+button#onLampe{
+	padding: 8px;
+}
+
+button#offLampe{
+	padding: 8px;
+}
+
+img{
+	-webkit-box-shadow: 1px 1px 12px #555;
+	-moz-box-shadow: 1px 1px 12px #555;  
+}
+
+/*div#label{
+	background: #ff911d;
+	width : 620px;
+	position: relative;
+	float : right;
+	text-align: center;
+}*/
+
+div#footer{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-top: 20px;
+	background: #084566;
+	text-align: center;
+	height: 50px;
+	position: relative;
+	color:#ffffff;
+	-moz-border-radius : 20px;
+	-webkit-border-radius : 20px;
+}

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>WseWeb: Probe</title>
+</head>
+
+	<script LANGUAGE="JavaScript" src="/WSE/libJS/prototype.js"></script>
+	<script LANGUAGE="JavaScript" src="/WSE/libJS/urls.js"></script>
+	<script LANGUAGE="JavaScript" src="/WSE/libJS/wse.js"></script>
+	<script LANGUAGE="JavaScript" src="HtmlUtilities.js"></script>
+
+	<script>
+	
+	
+	function displaySessions () 
+	{
+	 	new Ajax.Request(urls.wse.getSessions,
+		    {
+		        method:'post',
+		        parameters: { },
+		        onSuccess: displaySessions_Display,
+		        onFailure: displaySessions_Error
+		    }
+		);
+	}
+	
+	function displaySessions_Display ( transport , json ) {
+		sessions=json.files;
+		
+		// To choose an existing session
+		
+		sessionTable = HtmlTableForAList ( sessions, " Choose an existing session : ");
+		document.body.appendChild(sessionTable.table);
+		for (var i=0;i<sessions.length;i++) {
+			sessionTable.getCell(0,i).setAttribute("style","cursor:pointer;");
+			sessionTable.getCell(0,i).setAttribute("onclick","startSession('"+sessions[i]+"')");
+			sessionTable.setText(1,i," !clean!");
+			sessionTable.getCell(1,i).setAttribute("style","cursor:pointer;");
+			sessionTable.getCell(1,i).setAttribute("onclick","cleanSession('"+sessions[i]+"')");
+		}
+		
+		// To create a new one
+		newSessionBlock=createAndAddHtmlElement("p",document.body,"align","center");
+		var nameNewSession=createAndAddHtmlElement("INPUT",newSessionBlock,"type","text","size","20");
+		var buttonCreate=createAndAddHtmlElement("BUTTON",newSessionBlock);
+		buttonCreate.zone=nameNewSession;
+		addTextToHtmlElement(buttonCreate,"Or create a new one");
+		buttonCreate.onclick=function () {
+			if (this.zone.value==null || this.zone.value=="")
+				return;
+			startSession(this.zone.value);
+		}
+	}
+	
+	function displaySessions_Error (  ) {
+		document.body.innerHTML+="Error while getting infos on existing sessions";
+	}
+		
+	function createMainFrame () {
+		var mainTable = new HtmlTable (1,3);
+		
+		var leftBorder=mainTable.getCell(0,0);
+		leftBorder.setAttribute("width","1px");
+		leftBorder.setAttribute("bgcolor","black");
+		leftBorder.setAttribute("style","");
+		
+		var rightBorder=mainTable.getCell(2,0);
+		rightBorder.setAttribute("width",1);
+		rightBorder.setAttribute("bgcolor","black");
+		rightBorder.setAttribute("style","");
+		
+		mainFrame=mainTable.getCell(1,0);
+		mainFrame.setAttribute("width",800);
+		mainFrame.setAttribute("bgcolor","white");
+		
+		mainTable.setBorderColor("white");
+		//mainTable.table.setAttribute("bgcolor","white");
+		
+		document.body.appendChild(mainTable.table);
+		
+	}
+	
+	function createHeadBlock() {
+		var headBlock=createAndAddHtmlElement("p",mainFrame,"align","center",
+				"style","color : black; background : #33CCFF;font-family: arial, helvetica, sans-serif;font-size : 28px;");
+		addBRToHtmlElement(headBlock);
+		addTextToHtmlElement(headBlock,"Session "+wse.name);
+		insertEmptyLinetoHtmlElement(headBlock);
+	}
+	function createSendingBlock() {
+		var sendingBlock=createAndAddHtmlElement("p",mainFrame,"align","center",
+				"style","color : white; background : #33CCCC;font-family: arial, helvetica, sans-serif;font-size : 20px;");
+		
+		addTextToHtmlElement(sendingBlock,"Send a message :")
+		
+		insertEmptyLinetoHtmlElement(sendingBlock);
+		
+		jsonObject=createAndAddHtmlElement("TEXTAREA",sendingBlock,"cols",60,"rows",8);
+		jsonObject.value='{\n  "param1" : "value1",\n  "param2" : "value2",\n  "param3" : "value3"\n}';
+		
+		insertEmptyLinetoHtmlElement(sendingBlock);
+		
+		var sendButton=createAndAddHtmlElement("BUTTON",sendingBlock);
+		addTextToHtmlElement(sendButton,"Send message to "+wse.name+" session");
+		sendButton.onclick=function () {
+			if (jsonObject.value==null || jsonObject.value=="")
+				return;
+			wse.sendMessage(JSON.parse(jsonObject.value));
+		}
+		
+		insertEmptyLinetoHtmlElement(sendingBlock);
+		
+	}
+	
+	function createReceivingBlock() {
+		var receivingBlock=createAndAddHtmlElement("p",mainFrame,"align","center",
+				"style","color : black; background : #33CC99;font-family: arial, helvetica, sans-serif;font-size : 20px;");
+		addTextToHtmlElement(receivingBlock,"Receiving messages :");
+		
+		insertEmptyLinetoHtmlElement(receivingBlock);
+		
+		messages=createAndAddHtmlElement("p",receivingBlock,"align","center",
+				"style","color : black; font-family: arial, helvetica, sans-serif;font-size : 12px;");
+		
+	}
+	
+	function cleanSession (session) {
+		if (confirm("Are you sure (destroy session "+session+") ?")) {
+			wse.cleanSession(session);
+			window.location.reload();
+		}
+	}
+	function startSession (session) {
+		while (document.body.hasChildNodes())
+			document.body.removeChild(document.body.firstChild);
+		//document.body.removeChild(sessionTable.table);
+		//document.body.removeChild(newSessionBlock);
+		wse.joinSession(session);
+		createMainFrame();
+		createHeadBlock();
+		createSendingBlock();
+		createReceivingBlock();
+
+		a = {};
+		//lastmessage;
+		a.newMessageReceive = function (message) 
+		{
+			lastmessage = message;
+			message.timeStamp=new Date().toLocaleString();
+			messages.insertBefore(HtmlVerticalTableForAnObject(message).table,messages.firstChild);
+			messages.insertBefore(document.createElement("br"),messages.firstChild);
+		}
+		
+		wse.addListener(a);
+    }
+		
+	//wse.sendMessage(JSON.parse(document.getElementById('mess').value));
+
+	</script>
+
+
+	<body bgColor="white">
+		<P align="center"><img src="title.png"></p>
+		<BR/><BR/>
+</body>
+	<script>
+	displaySessions();
+	</script>
+</html>

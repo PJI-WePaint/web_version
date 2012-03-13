@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>WePaint</title>
+      <script type="text/Javascript" src="js/jquery-min.js"></script>
+      <script type="text/javascript">
+      	jQuery.noConflict();
+      </script>
+			<script type="text/Javascript" src="js/svgComponents.js"></script>
+			<script type="text/Javascript" src="/WSE/libJS/prototype-1.7.js"></script>
+			<script type="text/Javascript" src="/WSE/libJS/urls.js"></script>
+			<script type="text/Javascript" src="/WSE/libJS/wse.js"></script>
+			<script type="text/Javascript" src="js/devices.js"></script>
+			<script type="text/javascript" src="js/qrcode.js"></script>
+			<script type="text/javascript" src="js/gen_qrcode.js"></script>
+			<link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+	</head>
+	<body id="body">
+		<header id="head">
+			<div id="paint-header">
+				<img src="images/PaintHeader.png" />
+			</div>
+			<a target="_blank" href="http://www.lifl.fr/~lepallex/index.php?page=how-to-use-miny-paint"> 
+				How to use my androphone
+			</a>
+			<div id="link_qrcodes">
+				<a href="#" id="configuration">Android configuration</a>
+				<a href="#" id="mobile-apk">Get Android App</a>
+				<a href="#" id="rase-qrcode">Erase QRCode</a>
+			</div>
+			<div id="qrcode">
+			</div>
+		</header>
+	</body>
+	<script type="text/Javascript" src="js/paint.js"></script>
+	<script type="text/Javascript" src="js/multiDevicesAccessForPaint.js"></script>
+</html>
