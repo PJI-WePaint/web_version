@@ -6,6 +6,7 @@ function stringListEquals (){
 }
 Manager = function (session){
   wse.joinSession(session);
+  console.log("joinsession");
   this.bus=wse;
 }
 Androphone = function (bus, location, locationParams)
@@ -52,7 +53,8 @@ Androphone = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      alert('error during receiving WSE message : '+message); 
+      console.log(message);
+      //alert('error during receiving WSE message : '+message); 
     }
   }
   this.bus.addListener(listener);
@@ -169,7 +171,8 @@ Epoc = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      alert('error during receiving WSE message : '+message); 
+      console.log(message);
+      //alert('error during receiving WSE message : '+message); 
     }
   }
   this.bus.addListener(listener);
@@ -208,7 +211,8 @@ RFiD = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      alert('error during receiving WSE message : '+message); 
+      console.log(message);
+      //alert('error during receiving WSE message : '+message); 
     }
   }
   this.bus.addListener(listener);

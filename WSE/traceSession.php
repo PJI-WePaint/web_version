@@ -64,7 +64,7 @@ function getMessages ($action,  $sessionName, $since ) {
 	// it starts if there is no new message for requester (comparing its $since)
 
 	while (getLastForSession($sessionName) <= $since && $numberOfLoopDone<$numberOfLoopToWaitBeforeTerminate) {
-		usleep(100);
+		sleep(1);
 		$numberOfLoopDone++;
 	}
 

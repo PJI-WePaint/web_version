@@ -61,7 +61,7 @@ ellipse.setFill("green");
 // Create CIRCLE tool
 
 var circle=new Circle(svgCircle.node,"25","25","20");
-circle.setStroke("black");
+circle.setStroke("blue");
 circle.setStrokeWidth("2");
 circle.setFill("brown");
 
@@ -136,7 +136,7 @@ function addEllipse() {
 
 function addCircle() { 
 	var circle=new Circle(svg.node,"75","75","50");
-	circle.setStroke("black");
+	circle.setStroke("blue");
 	circle.setStrokeWidth("2");
 	circle.setFill("brown");
 	circle.actualStroke="black";
