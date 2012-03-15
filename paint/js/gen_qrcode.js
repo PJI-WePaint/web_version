@@ -49,7 +49,7 @@ function showQRCode(text) {
 }
 
 function updateQRCode(text) {
-
+        jQuery("#qrcode").show();
         var element = document.getElementById("qrcode");
 
         var bodyElement = document.body;
@@ -69,6 +69,7 @@ function CreateJson_parameter(){
 
 
 jQuery(document).ready(function($) {
+    jQuery("#qrcode").hide();
     jQuery("#configuration").click(function(){
       text = CreateJson_parameter();
       updateQRCode(text);
@@ -80,7 +81,7 @@ jQuery(document).ready(function($) {
     });
 
     jQuery("#rase-qrcode").click(function(){
-      jQuery("#qrcode").html(" ");
+      jQuery("#qrcode").hide();
     });
 });
   

@@ -545,3 +545,4 @@
 {"source":1331847351351,"message":{"action":"accelerometer","locationParams":"Xavier","object":"Androphone","actionParams":{"z":8,"y":1,"x":-4},"location":"Home"}}
 {"source":1331847351351,"message":{"action":"accelerometer","locationParams":"Xavier","object":"Androphone","actionParams":{"z":9,"y":2,"x":-1},"location":"Home"}}
 {"source":1331847351351,"message":{"action":"accelerometer","locationParams":"Xavier","object":"Androphone","actionParams":{"z":9,"y":1,"x":3},"location":"Home"}}
+{"source":1331850848971,"message":{"action":"message","locationParams":"Xavier","object":"Androphone","actionParams":{"message":"circle"},"location":"Home"}}
