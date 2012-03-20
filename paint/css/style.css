@@ -52,3 +52,23 @@ header{
   color: #3E3D3D;
 }
 
+#dialog_sessions{
+  text-align: center;
+}
+
+#sessions{
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 2px 0 2px;
+}
+
+#sessions .session {
+  border-top: 1px solid black;
+}
+
+#sessions .session:hover{
+  cursor: pointer;
+}
+#sessions .session:first-child{
+  border: none;
+}

@@ -11,19 +11,21 @@ $dossier= array();
 
 while($element = readdir($dir)) 
 {
-	if($element != '.' && $element != '..') 
-	{
-		if (!is_dir($dir_nom.'/'.$element)) 
-		{
-			$fichier[] = $element;
-		}
-		else 
-		{
-			$dossier[] = $element;
-		}
-	}
+  if($element != '.' && $element != '..') 
+  {
+    if (!is_dir($dir_nom.'/'.$element)) 
+    {
+      $fichier[] = $element;
+    }
+    else 
+    {
+      $dossier[] = $element;
+    }
+  }
 }
 
 $result= array(files => $fichier, directories => $dossier);
-header("X-JSON: " . json_encode($result));
+header('Content-type: application/json');
+echo json_encode($result);
+//header("X-JSON: " . json_encode($result));
 ?>
