@@ -24,7 +24,7 @@ while($element = readdir($dir))
   }
 }
 
-$result= array(files => $fichier, directories => $dossier);
+$result= array("files" => $fichier, "directories" => $dossier);
 header('Content-type: application/json');
 echo json_encode($result);
 //header("X-JSON: " . json_encode($result));
