@@ -65,17 +65,17 @@ function beginSession() {
     // MESSAGE EVENTS
     //
     androphone.message = function(message) {
-      if (message.toUpperCase() == "CIRCLE") addCircle();
-      else if (message.toUpperCase() == "RECTANGLE") addRectangle();
-      else if (message.toUpperCase() == "LINE") addLine();
-      else if (message.toUpperCase() == "ELLIPSE") addEllipse();
+      if (message.toUpperCase() == "CIRCLE") add_circle();
+      else if (message.toUpperCase() == "RECTANGLE") add_rectangle();
+      //else if (message.toUpperCase() == "LINE") addLine();
+      else if (message.toUpperCase() == "ELLIPSE") add_ellipse();
       else return;
       this.resetCompassValues();
     }
 
     androphone.textRecognised = function(text) {
-      if (text.toUpperCase() == "CIRCLE") addCircle();
-      else if (text.toUpperCase() == "RECTANGLE") addRectangle();
+      if (text.toUpperCase() == "CIRCLE") add_circle();
+      else if (text.toUpperCase() == "RECTANGLE") add_rectangle();
       else if (text.toUpperCase() == "LINE") addLine();
       else if (text.toUpperCase() == "ELLIPSE") addEllipse();
       else return;

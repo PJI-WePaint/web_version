@@ -40,29 +40,14 @@ function create_menu() {
   var square = paper_menu.rect(25, 180, 90, 90).attr(default_color).click(function() {
     add_square();
   });
-  // TODO : add listener 
+
+  var ellipse = paper_menu.ellipse(70, 310, 40,30).attr(default_color).click(function(){
+    add_ellipse();
+  });
 }
 
 
 function add_circle() {
-  var start = function() {
-      this.ox = this.attr("cx");
-      this.oy = this.attr("cy");
-      this.attr({
-        opacity: .5
-      });
-    },
-    move = function(dx, dy) {
-      this.attr({
-        cx: this.ox + dx,
-        cy: this.oy + dy
-      });
-    },
-    up = function() {
-      this.attr({
-        opacity: 5
-      });
-    };
   var circle = paper_paint.circle(70, 50, 40).attr(default_color);
   circle.drag(move, start, up);
 
@@ -76,6 +61,11 @@ function add_rectangle() {
 function add_square() {
   var square = paper_paint.rect(70, 50, 90, 90).attr(default_color);
   square.drag(move, start, up);
+}
+
+function add_ellipse(){
+  var ellipse = paper_paint.ellipse(70, 50, 40,30).attr(default_color);
+  ellipse.drag(move,start,up);
 }
 
 
