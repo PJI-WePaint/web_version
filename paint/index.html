@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>WePaint</title>
-      <script type="text/Javascript" src="js/jquery-min.js"></script>
-      <script type="text/javascript">
-      	jQuery.noConflict();
-      </script>
-			<script type="text/Javascript" src="js/config.js"></script>
-			<script type="text/Javascript" src="js/help.js"></script>
-			<script type="text/Javascript" src="/WSE/libJS/urls.js"></script>
-			 <script type="text/Javascript" src="svgComponents.js"></script>
-      <script type="text/Javascript" src="/WSE/libJS/prototype.js"></script>
-      <script type="text/Javascript" src="/WSE/libJS/wse.js"></script>
-      <script type="text/Javascript" src="devices.js"></script>
-			<script type="text/javascript" src="js/qrcode.js"></script>
-			<script type="text/javascript" src="js/gen_qrcode.js"></script>
-			<script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
-			<script type="text/javascript" src="js/session.js"></script>
-			<link rel="stylesheet" type="text/css" href="./css/style.css" />
-			<link rel="stylesheet" type="text/css" href="./css/jquery-ui-1.8.18.custom.css" />
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+      WePaint
+    </title>
+    <script type="text/Javascript" src="js/jquery-min.js">
+    </script>
+    <script type="text/javascript">
+          	jQuery.noConflict();
+    </script>
+    <script type="text/Javascript" src="js/config.js">
+    </script>
+    <script type="text/Javascript" src="js/help.js">
+    </script>
+    <script type="text/javascript" src="js/raphael.js">
+    </script>
+    <script type="text/Javascript" src="/WSE/libJS/urls.js">
+    </script>
+    <script type="text/Javascript" src="/WSE/libJS/prototype.js">
+    </script>
+    <script type="text/Javascript" src="/WSE/libJS/wse.js">
+    </script>
+    <script type="text/Javascript" src="devices.js">
+    </script>
+    <script type="text/javascript" src="js/qrcode.js">
+    </script>
+    <script type="text/javascript" src="js/gen_qrcode.js">
+    </script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js">
+    </script>
+    <script type="text/javascript" src="js/session.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery-ui-1.8.18.custom.css"
+    />
+  </head>
+  
+  <body id="body">
+    <header id="head">
+      <div id="paint-header">
+        <img src="./images/logo.png" />
+      </div>
+      <div id="link_qrcodes">
+        <div class="item-menu">
+          <img src="./images/configuration.png" />
+          <a href="#" id="configuration">Configuration</a>
+        </div>
+        <div class="item-menu">
+          <img src="./images/smartphone.png" />
+          <a href="#" id="mobile-apk">Get Android App</a>
+        </div>
+      </div>
+      <div id="qrcode">
+        <a href="#" id="rase-qrcode">X</a>
+      </div>
+    </header>
+    <div id="dialog_sessions" title="Choose or create an sessions">
+      <div class="dialog_content">
+        <div class="loader">
+        </div>
+      </div>
+      <div id="form_session">
+        <input id="text_session" type="text" name="session" />
+        <input id="submit_session" placeholder="Name of session" type="submit" value="Create a new session"
+        />
+      </div>
+    </div>
+    <div id="paint">
+      <div id="paper_paint">
+      </div>
+      <div id="paper_menu">
+      </div>
+    </div>
+    <script type="text/Javascript" src="js/paint.js">
+    </script>
+    <script type="text/Javascript" src="multiDevicesAccessForPaint.js">
+    </script>
+  </body>
 
-	</head>
-	<body id="body">
-		<header id="head">
-			<div id="paint-header">
-				<img src="./images/logo.png" />
-			</div>
-			<div id="link_qrcodes">
-				<div class="item-menu">
-					<img src="./images/configuration.png" />
-					<a href="#" id="configuration">Configuration</a>
-				</div>
-				<div class="item-menu">
-					<img src="./images/smartphone.png" />
-					<a href="#" id="mobile-apk">Get Android App</a>
-				</div>
-			</div>
-			<div id="qrcode">
-				<a href="#" id="rase-qrcode">X</a>
-			</div>
-		</header>
-		<div id="dialog_sessions" title="Choose or create an sessions">
-			<div class="dialog_content">
-				<div class="loader">
-				</div>
-			</div>
-			<div id="form_session">
-					<input id="text_session" type="text" name="session" />
-					<input id="submit_session" placeholder="Name of session" type="submit" value="Create a new session"/>
-				</div>
-		</div>
-	<script type="text/Javascript" src="paint.js"></script>
-	 <script type="text/Javascript" src="multiDevicesAccessForPaint.js"></script>
-	</body>
 </html>

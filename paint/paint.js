@@ -121,6 +121,7 @@ function addRectangle() {
 	rectangle.actualStroke="black";
 	setCurrent(rectangle.node);
 	rectangle.node.addEventListener("mousedown",beginMove,false);
+	paint.createObjectServeur("Rectangle");
 }
 
 function addEllipse() { 

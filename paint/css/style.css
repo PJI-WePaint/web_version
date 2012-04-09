@@ -72,3 +72,20 @@ header{
 #sessions .session:first-child{
   border: none;
 }
+
+#paint{
+  width:1020px;
+  margin: auto;
+}
+
+#paper_paint{
+  width: 850px;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+#paper_menu{
+  width: 150px;
+  border: 1px solid black;
+  display: inline-block;
+}

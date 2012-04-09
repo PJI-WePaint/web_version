@@ -6,7 +6,6 @@ function stringListEquals (){
 }
 Manager = function (session){
   wse.joinSession(session);
-  console.log("joinsession");
   this.bus=wse;
 }
 Androphone = function (bus, location, locationParams)
@@ -53,14 +52,21 @@ Androphone = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      console.log(message);
-      //alert('error during receiving WSE message : '+message); 
+      alert('error during receiving WSE message : '+message); 
     }
   }
   this.bus.addListener(listener);
 }
 Androphone.prototype = {
   useless_butUsefulForGeneration : ''
+  ,
+  notification : function ( message ){
+    this.objMsg.action='notification';
+    var actionParams = {};
+    actionParams.message=message;
+    this.objMsg.actionParams=actionParams;
+    this.bus.sendMessage(this.objMsg);
+  }
   ,
   vibrate : function ( position ){
     this.objMsg.action='vibrate';
@@ -101,162 +107,47 @@ Androphone.prototype = {
 Manager.prototype['getAndrophone'] = function (location, locationParams){
   return new Androphone (this.bus, location, locationParams);
 }
-Camera = function (bus, location, locationParams)
+Paint = function (bus, location, locationParams)
 {
   this.bus=bus;
   this.objMsg={};
   this.objMsg.location=location;
   this.objMsg.locationParams=locationParams;
-  this.objMsg.object='Camera';
-}
-Camera.prototype = {
-  useless_butUsefulForGeneration : ''
-  ,
-  goHome : function (  ){
-    this.objMsg.action='goHome';
-    var actionParams = {};
-    this.objMsg.actionParams=actionParams;
-    this.bus.sendMessage(this.objMsg);
-  }
-  ,
-  moveDown : function (  ){
-    this.objMsg.action='moveDown';
-    var actionParams = {};
-    this.objMsg.actionParams=actionParams;
-    this.bus.sendMessage(this.objMsg);
-  }
-  ,
-  moveRight : function (  ){
-    this.objMsg.action='moveRight';
-    var actionParams = {};
-    this.objMsg.actionParams=actionParams;
-    this.bus.sendMessage(this.objMsg);
-  }
-  ,
-  moveUp : function (  ){
-    this.objMsg.action='moveUp';
-    var actionParams = {};
-    this.objMsg.actionParams=actionParams;
-    this.bus.sendMessage(this.objMsg);
-  }
-  ,
-  moveLeft : function ( position ){
-    this.objMsg.action='moveLeft';
-    var actionParams = {};
-    actionParams.position=position;
-    this.objMsg.actionParams=actionParams;
-    this.bus.sendMessage(this.objMsg);
-  }
-}
-Manager.prototype['getCamera'] = function (location, locationParams){
-  return new Camera (this.bus, location, locationParams);
-}
-Epoc = function (bus, location, locationParams)
-{
-  this.bus=bus;
-  this.objMsg={};
-  this.objMsg.location=location;
-  this.objMsg.locationParams=locationParams;
-  this.objMsg.object='Epoc';
+  this.objMsg.object='Paint';
   var listener = {};
   listener.object=this;
   listener.newMessageReceive = function (message) {
     try{
       var objMsg=this.object.objMsg;
       if (stringListEquals(message.location, objMsg.location, message.locationParams, objMsg.locationParams, objMsg.object, message.object)){
-        if (stringListEquals(message.action,'brainStateReport')) {
+        if (stringListEquals(message.action,'createObject')) {
           var actionParams=message.actionParams;
-          this.object.brainStateReport(actionParams.excitement , actionParams.boredom , actionParams.meditation);
+          this.object.createObject(actionParams.nameObject);
         }
       }
     }
     catch (ex) {
-      console.log(message);
-      //alert('error during receiving WSE message : '+message); 
+      /*alert('error during receiving WSE message : '+message); */
+      console.log('error during receiving WSE message : '+message)
     }
   }
   this.bus.addListener(listener);
 }
-Epoc.prototype = {
+Paint.prototype = {
   useless_butUsefulForGeneration : ''
   ,
-  brainStateReport : function ( excitement , boredom , meditation ){
-    alert('brainStateReport');
-  }
-}
-Manager.prototype['getEpoc'] = function (location, locationParams){
-  return new Epoc (this.bus, location, locationParams);
-}
-RFiD = function (bus, location, locationParams)
-{
-  this.bus=bus;
-  this.objMsg={};
-  this.objMsg.location=location;
-  this.objMsg.locationParams=locationParams;
-  this.objMsg.object='RFiD';
-  var listener = {};
-  listener.object=this;
-  listener.newMessageReceive = function (message) {
-    try{
-      var objMsg=this.object.objMsg;
-      if (stringListEquals(message.location, objMsg.location, message.locationParams, objMsg.locationParams, objMsg.object, message.object)){
-        if (stringListEquals(message.action,'pickUp')) {
-          var actionParams=message.actionParams;
-          this.object.pickUp(actionParams.stamp);
-        }
-        if (stringListEquals(message.action,'layDown')) {
-          var actionParams=message.actionParams;
-          this.object.layDown(actionParams.stamp);
-        }
-      }
-    }
-    catch (ex) {
-      console.log(message);
-      //alert('error during receiving WSE message : '+message); 
-    }
-  }
-  this.bus.addListener(listener);
-}
-RFiD.prototype = {
-  useless_butUsefulForGeneration : ''
-  ,
-  pickUp : function ( stamp ){
-    alert('pickUp');
-  }
-  ,
-  layDown : function ( stamp ){
-    alert('layDown');
-  }
-}
-Manager.prototype['getRFiD'] = function (location, locationParams){
-  return new RFiD (this.bus, location, locationParams);
-}
-X10 = function (bus, location, locationParams, objectParams)
-{
-  this.bus=bus;
-  this.objMsg={};
-  this.objMsg.location=location;
-  this.objMsg.locationParams=locationParams;
-  this.objMsg.object='X10';
-  this.objMsg.objectParams=objectParams;
-}
-X10.prototype = {
-  useless_butUsefulForGeneration : ''
-  ,
-  switchOff : function (  ){
-    this.objMsg.action='switchOff';
+  createObjectServeur : function ( nameObject ){
+    this.objMsg.action='createObject';
     var actionParams = {};
+    actionParams.nameObject=nameObject;
     this.objMsg.actionParams=actionParams;
     this.bus.sendMessage(this.objMsg);
   }
   ,
-  switchOn : function (  ){
-    this.objMsg.action='switchOn';
-    var actionParams = {};
-    this.objMsg.actionParams=actionParams;
-    this.bus.sendMessage(this.objMsg);
+  createObject : function ( nameObject ){
+    alert('createObject');
   }
 }
-Manager.prototype['getX10'] = function (location, locationParams, objectParams){
-  return new X10 (this.bus, location, locationParams, objectParams);
+Manager.prototype['getPaint'] = function (location, locationParams){
+  return new Paint (this.bus, location, locationParams);
 }
