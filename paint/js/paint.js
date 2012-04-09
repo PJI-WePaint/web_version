@@ -1,9 +1,9 @@
 var paper_paint;
 var paper_menu;
+var current = null;
 var default_color = {
   fill: '#B9B5B5',
-  stroke: '#B9B5B5',
-  'stroke-width': 1
+  stroke: 'none'
 };
 
 var ox = 0;
@@ -12,6 +12,7 @@ var start = function() {
     this.attr({
       opacity: .5
     });
+    set_current(this);
   },
   move = function(dx, dy) {
     this.attr({
@@ -41,7 +42,7 @@ function create_menu() {
     add_square();
   });
 
-  var ellipse = paper_menu.ellipse(70, 310, 40,30).attr(default_color).click(function(){
+  var ellipse = paper_menu.ellipse(70, 310, 40, 30).attr(default_color).click(function() {
     add_ellipse();
   });
 }
@@ -50,22 +51,40 @@ function create_menu() {
 function add_circle() {
   var circle = paper_paint.circle(70, 50, 40).attr(default_color);
   circle.drag(move, start, up);
+  set_current(circle);
 
 }
 
 function add_rectangle() {
   var rectangle = paper_paint.rect(70, 50, 90, 50).attr(default_color);
   rectangle.drag(move, start, up);
+  set_current(rectangle);
 }
 
 function add_square() {
   var square = paper_paint.rect(70, 50, 90, 90).attr(default_color);
   square.drag(move, start, up);
+  set_current(square);
 }
 
-function add_ellipse(){
-  var ellipse = paper_paint.ellipse(70, 50, 40,30).attr(default_color);
-  ellipse.drag(move,start,up);
+function add_ellipse() {
+  var ellipse = paper_paint.ellipse(70, 50, 40, 30).attr(default_color);
+  ellipse.drag(move, start, up);
+  set_current(ellipse);
+}
+
+function set_current(object) {
+  if(current != null){
+    current.attr({stroke: "none"});
+  }
+  current = object;
+  console.log(current);
+  object.attr({
+    stroke: "#FF0101",
+    "stroke-width": 2,
+    "stroke-linejoin": "round",
+    "stroke-linecap": "round"
+  });
 }
 
 

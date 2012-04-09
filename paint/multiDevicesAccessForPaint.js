@@ -13,7 +13,7 @@ function beginSession() {
     manager = new Manager(sessionName);
 
     androphone = manager.getAndrophone(_location, "Xavier");
-    paint = manager.getPaint(_location, null);
+    paint = manager.getPaint(null, null);
 
     // QR CODE EVENTS
     //
