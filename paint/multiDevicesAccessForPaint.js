@@ -67,21 +67,13 @@ function beginSession() {
     // MESSAGE EVENTS
     //
     androphone.message = function(message) {
-      if (message.toUpperCase() == "CIRCLE") add_circle();
-      else if (message.toUpperCase() == "RECTANGLE") add_rectangle();
-      //else if (message.toUpperCase() == "LINE") addLine();
-      else if (message.toUpperCase() == "ELLIPSE") add_ellipse();
-      else return;
+      add_element(message,false);
       this.resetCompassValues();
       this.resetAcceleroValues();
     }
 
     androphone.textRecognised = function(text) {
-      if (text.toUpperCase() == "CIRCLE") add_circle();
-      else if (text.toUpperCase() == "RECTANGLE") add_rectangle();
-      else if (text.toUpperCase() == "LINE") addLine();
-      else if (text.toUpperCase() == "ELLIPSE") addEllipse();
-      else return;
+      add_element(text,false);
       this.resetCompassValues();
     }
 
@@ -92,10 +84,7 @@ function beginSession() {
     // GET AN ADAPTER TO RFID READER
     //
     paint.createObject = function(nameObject) {
-      if (nameObject.toUpperCase() == "CIRCLE") addCircle();
-      else if (nameObject.toUpperCase() == "RECTANGLE") addRectangle();
-      else return;
-      this.resetCompassValues();
+      add_element(nameObject,false);
     }
 
   }

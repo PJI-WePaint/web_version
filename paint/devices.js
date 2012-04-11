@@ -52,6 +52,7 @@ Androphone = function(bus, location, locationParams) {
       //alert('error during receiving WSE message : '+message);
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
+      console.trace();
     }
   }
   this.bus.addListener(listener);
@@ -117,6 +118,7 @@ Paint = function(bus, location, locationParams) {
     } catch (ex) { /*alert('error during receiving WSE message : '+message); */
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
+      console.trace();
     }
   };
   this.bus.addListener(listener);
