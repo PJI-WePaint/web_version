@@ -51,25 +51,52 @@ function create_menu() {
 function add_circle() {
   var circle = paper_paint.circle(70, 50, 40).attr(default_color);
   circle.drag(move, start, up);
+  circle.mousedown(function (e){
+    if(e.which == 3){
+      this.remove();
+      if(this.id == current.id)
+        current = null;
+    }
+  });
   set_current(circle);
-
 }
 
 function add_rectangle() {
   var rectangle = paper_paint.rect(70, 50, 90, 50).attr(default_color);
   rectangle.drag(move, start, up);
+  rectangle.mousedown(function (e){
+    if(e.which == 3){
+      this.remove();
+      if(this.id == current.id)
+        current = null;
+    }
+  });
   set_current(rectangle);
 }
 
 function add_square() {
   var square = paper_paint.rect(70, 50, 90, 90).attr(default_color);
   square.drag(move, start, up);
+  square.mousedown(function (e){
+    if(e.which == 3){
+      this.remove();
+      if(this.id == current.id)
+        current = null;
+    }
+  });
   set_current(square);
 }
 
 function add_ellipse() {
   var ellipse = paper_paint.ellipse(70, 50, 40, 30).attr(default_color);
   ellipse.drag(move, start, up);
+  ellipse.mousedown(function (e){
+    if(e.which == 3){
+      this.remove();
+      if(this.id == current.id)
+        current = null;
+    }
+  });
   set_current(ellipse);
 }
 
