@@ -120,7 +120,6 @@ wse =
 
 	beingUpdated_CallBack : function (transport, json) 
 	{
-		console.log(json.lastMessages);
 		if(transport == null || json == null)
 		{
 			wse.beingUpdated();

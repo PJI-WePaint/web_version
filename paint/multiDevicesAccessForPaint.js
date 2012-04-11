@@ -34,7 +34,7 @@ function beginSession() {
       }
       var dx = x - this.compassX;
       var dy = y - this.compassY;
-      current.__object.move(dx * 2, dy * 2);
+      move_object(current,dx*2,dy*2);
       this.compassX = x;
       this.compassY = y;
     }
@@ -46,18 +46,18 @@ function beginSession() {
     // ACCELEROMETER EVENTS
     //
     androphone.accelerometer = function(x, y, z) {
-     /* if (this.acceleroX == 500) {
+     if (this.acceleroX == 500) {
         this.acceleroX = x;
         this.acceleroY = y;
       }
       var dx = this.acceleroX - x;
       var dy = this.acceleroY - y;
-      current.__object.move(dx * 20, dy * 20);
+       move_object(current,dx*20,dy*20);
       this.acceleroX = x;
-      this.acceleroY = y;*/
+      this.acceleroY = y;
       var dx =x;
       var dy = y;
-      move_object(current,dx,dy);
+     
     }
 
     androphone.resetAcceleroValues = function() {
@@ -73,6 +73,7 @@ function beginSession() {
       else if (message.toUpperCase() == "ELLIPSE") add_ellipse();
       else return;
       this.resetCompassValues();
+      this.resetAcceleroValues();
     }
 
     androphone.textRecognised = function(text) {

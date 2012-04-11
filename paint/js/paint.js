@@ -79,6 +79,7 @@ function set_current(object) {
       stroke: "none"
     });
   }
+  androphone.resetAcceleroValues();
   current = object;
   object.attr({
     stroke: "#FF0101",
@@ -89,11 +90,13 @@ function set_current(object) {
 }
 
 function move_object(object, dx, dy){
-  console.log(dx);
-  console.log(dy);
-  current.attr({
+  console.log("dx"+dx);
+  console.log("dy"+dy);
+  if(current != null){
+    current.attr({
       transform: "...T" + (dx) + "," + (dy)
     });
+  }
 }
 
 jQuery(document).ready(function() {
