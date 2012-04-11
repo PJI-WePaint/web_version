@@ -26,4 +26,5 @@ while($element = readdir($dir))
 
 $result= array(files => $fichier, directories => $dossier);
 header("X-JSON: " . json_encode($result));
+
 ?>

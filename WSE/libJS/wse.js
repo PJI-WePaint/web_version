@@ -49,13 +49,10 @@ wse =
 	},
 	ipAddressCallBack : function (transport, json) 
 	{
-		console.log("ipaddress");
 		wse.ipAddress = json.ipAddress;
 	},
 	
-	ipAddressBackError : function () {
-		console.log("error get ipaddress");
-	},
+	ipAddressBackError : function () {},
 	
 	joinSession : function (sessionName) 
 	{
@@ -83,7 +80,6 @@ wse =
 	
 	sendMessage : function (mess) 
 	{
-		console.log(mess);
 	 	var m =  { source :  wse.id, message : mess };
 	    
 		tilt=Object.toJSON(m);
@@ -102,13 +98,9 @@ wse =
 		);
 	},
 
-	sendMessageCallBack : function (transport, json) {
-		console.log("send succes");
-	},
+	sendMessageCallBack : function (transport, json) { },
 
-	sendMessageCallBackError : function () { 
-		console.log("error");
-	},
+	sendMessageCallBackError : function () { },
 	
 	beingUpdated : function () 
 	{
@@ -128,7 +120,7 @@ wse =
 
 	beingUpdated_CallBack : function (transport, json) 
 	{
-		console.log("beginUpdated");
+		console.log(json.lastMessages);
 		if(transport == null || json == null)
 		{
 			wse.beingUpdated();
@@ -136,7 +128,6 @@ wse =
 		else
 		{
 			//alert(json.lastIndex + " : " + json.lastMessages);
-			console.log(json.lastIndex + " : " + json.lastMessages);
 			wse.counter=json.lastIndex;
 			wse.processMessages(json.lastMessages);
 			wse.beingUpdated();
@@ -144,10 +135,9 @@ wse =
 	},
 	
 
-	beingUpdated_CallBackError : function (e) 
+	beingUpdated_CallBackError : function () 
 	{
-		console.log(e);
-		//alert("error on session.beingUpdated_CallBackError");
+		alert("error on session.beingUpdated_CallBackError");
 	},
 	
 	processMessages : function (messages) 
@@ -160,7 +150,6 @@ wse =
 	
 	processOneMessage : function (messageNF) 
 	{
-		console.log(messageNF);
 		messageNF2 = messageNF;
 		var message = messageNF.replace("\n","").replace(new RegExp('"',"g"),"'").evalJSON();
 		message2 = message;

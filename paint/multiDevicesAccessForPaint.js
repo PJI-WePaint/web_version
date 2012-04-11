@@ -17,16 +17,15 @@ function beginSession() {
 
     // QR CODE EVENTS
     //
-    androphone.qrCode = function(content) {
+   androphone.qrCode = function(content) {
       var color = content;
       if (shiftPressed) {
         current.__object.setStroke(color);
         current.__object.actualStroke = color;
       } else current.__object.setFill(color);
-      this.resetCompassValues()
+      this.resetCompassValues();
     }
-
-    // COMPASS EVENTS
+        // COMPASS EVENTS
     //
     androphone.compass = function(x, y, z) {
       if (this.compassX == 500) {
@@ -47,7 +46,7 @@ function beginSession() {
     // ACCELEROMETER EVENTS
     //
     androphone.accelerometer = function(x, y, z) {
-      if (this.acceleroX == 500) {
+     /* if (this.acceleroX == 500) {
         this.acceleroX = x;
         this.acceleroY = y;
       }
@@ -55,7 +54,10 @@ function beginSession() {
       var dy = this.acceleroY - y;
       current.__object.move(dx * 20, dy * 20);
       this.acceleroX = x;
-      this.acceleroY = y;
+      this.acceleroY = y;*/
+      var dx =x;
+      var dy = y;
+      move_object(current,dx,dy);
     }
 
     androphone.resetAcceleroValues = function() {

@@ -74,11 +74,12 @@ function add_ellipse() {
 }
 
 function set_current(object) {
-  if(current != null){
-    current.attr({stroke: "none"});
+  if (current != null) {
+    current.attr({
+      stroke: "none"
+    });
   }
   current = object;
-  console.log(current);
   object.attr({
     stroke: "#FF0101",
     "stroke-width": 2,
@@ -87,6 +88,13 @@ function set_current(object) {
   });
 }
 
+function move_object(object, dx, dy){
+  console.log(dx);
+  console.log(dy);
+  current.attr({
+      transform: "...T" + (dx) + "," + (dy)
+    });
+}
 
 jQuery(document).ready(function() {
   paper_paint = Raphael("paper_paint", 850, 400);

@@ -1,5 +1,5 @@
 function getSessions(json){
-  sessions = json.files
+  sessions = json.files;
   var temp = sessions;
   var value;
   var i;
@@ -7,7 +7,7 @@ function getSessions(json){
   for(i=0;i<length;i++){
     value = sessions[i];
     if(value != undefined && !value.startsWith(beginNameSession)){
-      delete temp[i]
+      delete temp[i];
     }
   }
   sessions = temp;
