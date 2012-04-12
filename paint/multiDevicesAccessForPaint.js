@@ -76,6 +76,9 @@ function beginSession() {
       this.resetCompassValues();
     }
 
+    androphone.color = function(code_color){
+      change_color_object(null,code_color);
+    }
 
     androphone.resetCompassValues();
     androphone.resetAcceleroValues();
