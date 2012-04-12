@@ -31,7 +31,7 @@ var start = function() {
   };
 
 function create_menu() {
-  paper_menu = Raphael("paper_menu", 150, 400);
+  paper_menu = Raphael("paper_menu", 150, 500);
 
   var circle = paper_menu.circle(70, 50, 40).attr(default_color).click(function() {
     add_element("circle", null, true);
@@ -46,6 +46,8 @@ function create_menu() {
   var ellipse = paper_menu.ellipse(70, 310, 40, 30).attr(default_color).click(function() {
     add_element("ellipse", null, true);
   });
+
+  var text = paper_menu.text(25,350,"Color:");
 }
 
 function add_element(element, id, server) {
@@ -139,6 +141,6 @@ function remove_object(object, id, server) {
 }
 
 jQuery(document).ready(function() {
-  paper_paint = Raphael("paper_paint", 850, 400);
+  paper_paint = Raphael("paper_paint", 850, 500);
   create_menu();
 });

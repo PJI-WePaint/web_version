@@ -11,26 +11,30 @@ header{
 #paint-header{
   font-size: 12px;
   text-align: left;
+  display: inline-block;
 }
 
-#paint-header img{
-  width: 40%;
+#paint-header > img{
+  width: 400px;
 }
 
 #link_qrcodes{
-  font-size: 12px;
+  font-size: 14px;
   display: inline-block;
   width: 50%;
   height:auto;
   vertical-align: top;
+  padding-top: 40px;
   
 }
 #link_qrcodes .item-menu{
   height:auto;
+  display:inline-block;
+  margin-left: 30px;
 }
 #link_qrcodes .item-menu img{
   display: inline-block;
-  width: 6%;
+  width: 25px;
 
 }
 
@@ -88,4 +92,8 @@ header{
   width: 150px;
   border: 1px solid black;
   display: inline-block;
+}
+
+#qrcode{
+  text-align:cente;
 }
