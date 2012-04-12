@@ -1,5 +1,6 @@
 var paper_paint;
 var paper_menu;
+var id_element = 0;
 var current = null;
 var default_color = {
   fill: '#B9B5B5',
@@ -33,51 +34,50 @@ function create_menu() {
   paper_menu = Raphael("paper_menu", 150, 400);
 
   var circle = paper_menu.circle(70, 50, 40).attr(default_color).click(function() {
-    add_element("circle",true);
+    add_element("circle", null, true);
   });
   var rectangle = paper_menu.rect(25, 110, 90, 50).attr(default_color).click(function() {
-    add_element("rectangle", true);
+    add_element("rectangle", null, true);
   });
   var square = paper_menu.rect(25, 180, 90, 90).attr(default_color).click(function() {
-    add_element("square", true);
+    add_element("square", null, true);
   });
 
   var ellipse = paper_menu.ellipse(70, 310, 40, 30).attr(default_color).click(function() {
-    add_element("ellipse", true);
+    add_element("ellipse", null, true);
   });
 }
 
-function add_element(element,server){
-  console.log(element);
-  var object = null
-  switch(element.toUpperCase()){
-    case "CIRCLE":
-      object = add_circle();
-      break;
-    case "RECTANGLE":
-      object = add_rectangle();
-      break;
-    case "SQUARE":
-      object = add_square();
-      break;
-    case "ELLIPSE":
-      object = add_ellipse();
-      break;
-    default: 
-      console.log("Element not implemented yet");
+function add_element(element, id, server) {
+  if (id != null) id_element = id;
+  else id_element++;
+  var object = null;
+  switch (element.toUpperCase()) {
+  case "CIRCLE":
+    object = add_circle();
+    break;
+  case "RECTANGLE":
+    object = add_rectangle();
+    break;
+  case "SQUARE":
+    object = add_square();
+    break;
+  case "ELLIPSE":
+    object = add_ellipse();
+    break;
+  default:
+    console.log("Element not implemented yet");
   }
-  if(object != null){
+  if (object != null) {
+    object.id = id_element;
     object.drag(move, start, up);
-    object.mousedown(function (e){
-    if(e.which == 3){
-      this.remove();
-      if(this.id == current.id)
-        current = null;
-    }
-  });
-  set_current(object);
-  if(server)
-    paint.createObjectServeur(element);
+    object.mousedown(function(e) {
+      if (e.which == 3) {
+        remove_object(this, id_element, true);
+      }
+    });
+    set_current(object);
+    if (server) paint.createObjectServeur(id, element);
   }
 }
 
@@ -117,17 +117,28 @@ function set_current(object) {
   });
 }
 
-function move_object(object, dx, dy){
-  if(current != null){
+function move_object(object, dx, dy) {
+  if (current != null) {
     current.attr({
       transform: "...T" + (dx) + "," + (dy)
     });
   }
 }
 
+function remove_object(object, id, server) {
+  var new_id;
+  if (object != null) {
+    new_id = object.id;
+  } else {
+    object = paper_paint.getById(id);
+    new_id = id;
+  }
+  object.remove();
+  if (current != null && object.id == current.id) current = null;
+  if (server) paint.removeObjectServeur(new_id);
+}
+
 jQuery(document).ready(function() {
   paper_paint = Raphael("paper_paint", 850, 400);
   create_menu();
-
-  //var rectangle = paint_c.circle(100,100, 80);
 });

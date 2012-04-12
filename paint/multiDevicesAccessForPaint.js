@@ -9,7 +9,6 @@
 
 function beginSession() {
   if (startSession) {
-    console.log(sessionName);
     manager = new Manager(sessionName);
 
     androphone = manager.getAndrophone(_location, "Xavier");
@@ -67,13 +66,13 @@ function beginSession() {
     // MESSAGE EVENTS
     //
     androphone.message = function(message) {
-      add_element(message,false);
+      add_element(message, null,false);
       this.resetCompassValues();
       this.resetAcceleroValues();
     }
 
     androphone.textRecognised = function(text) {
-      add_element(text,false);
+      add_element(text,null,false);
       this.resetCompassValues();
     }
 
@@ -83,8 +82,12 @@ function beginSession() {
 
     // GET AN ADAPTER TO RFID READER
     //
-    paint.createObject = function(nameObject) {
-      add_element(nameObject,false);
+    paint.createObject = function(idObject, typeObject) {
+      add_element(typeObject,idObject,false);
+    }
+
+    paint.removeObject = function(idObject){
+      remove_object(null, idObject, false);
     }
 
   }
