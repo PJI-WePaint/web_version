@@ -10,10 +10,12 @@
 function beginSession() {
   if (startSession) {
     manager = new Manager(sessionName);
-
+    // Tester voir si ça marche toujours 
     androphone = manager.getAndrophone(_location, "Xavier");
-    paint = manager.getPaint(null, null);
+    //androphone = manager.getAndrophone(_location, "");
+    paint = manager.getPaint("", "");
 
+    
     // QR CODE EVENTS
     //
    androphone.qrCode = function(content) {
@@ -78,6 +80,10 @@ function beginSession() {
 
     androphone.color = function(code_color){
       change_color_object(null,code_color);
+    }
+
+    androphone.removeCurrent = function(){
+      remove_object(null, null, false);
     }
 
     androphone.resetCompassValues();

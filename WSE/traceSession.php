@@ -56,15 +56,16 @@ function startswith($hay, $needle) {
 
 function getMessages ($action,  $sessionName, $since ) {
 	$sessionIndexFile = getIndexFileNameForSession ($sessionName);
-	$sessionContentFile = getContentFileNameForSession ($sessionName); 
-	$numberOfLoopToWaitBeforeTerminate=30;
+	$sessionContentFile = getContentFileNameForSession ($sessionName);
+	$timeWait= 5000; 
+	$numberOfLoopToWaitBeforeTerminate=(30*1000000)/$timeWait;
 	$numberOfLoopDone=0;
 	
 	// A LOOP THAT WAITS FOR CHANGE
 	// it starts if there is no new message for requester (comparing its $since)
 
 	while (getLastForSession($sessionName) <= $since && $numberOfLoopDone<$numberOfLoopToWaitBeforeTerminate) {
-		usleep(1000);
+		usleep($timeWait);
 		$numberOfLoopDone++;
 	}
 

@@ -95,7 +95,7 @@ function add_element(element, id, server) {
       }
     });
     set_current(object);
-    if (server) paint.createObjectServeur(id, element);
+    if (server) paint.createObjectServeur(id_element, element);
   }
 }
 
@@ -147,9 +147,12 @@ function remove_object(object, id, server) {
   var new_id;
   if (object != null) {
     new_id = object.id;
-  } else {
+  } else if(id != null){
     object = paper_paint.getById(id);
     new_id = id;
+  }else{
+    object = current;
+    new_id = current.id;
   }
   object.remove();
   if (current != null && object.id == current.id) current = null;
