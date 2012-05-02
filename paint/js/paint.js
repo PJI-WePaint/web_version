@@ -180,9 +180,9 @@ function change_color_object(id, code_color){
   }
   if(object != null){
     object.attr(color || default_color);
-    androphone.returnColor(code_color,true);
+    androphone.returnColor(true,code_color);
   }else{
-    androphone.returnColor(code_color,false);
+    androphone.returnColor(false,code_color);
   }
 }
 
