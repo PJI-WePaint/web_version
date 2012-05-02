@@ -29,13 +29,13 @@ Androphone = function (bus, location, locationParams)
           var actionParams=message.actionParams;
           this.object.textRecognised(actionParams.text);
         }
-        if (stringListEquals(message.action,'removeCurrent')) {
-          var actionParams=message.actionParams;
-          this.object.removeCurrent();
-        }
         if (stringListEquals(message.action,'color')) {
           var actionParams=message.actionParams;
           this.object.color(actionParams.code_color);
+        }
+        if (stringListEquals(message.action,'removeCurrent')) {
+          var actionParams=message.actionParams;
+          this.object.removeCurrent();
         }
         if (stringListEquals(message.action,'gpsLocation')) {
           var actionParams=message.actionParams;
@@ -63,7 +63,7 @@ Androphone = function (bus, location, locationParams)
       // alert('error during receiving WSE message : '+message); 
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
-      console.trace();
+      console.trace(); 
     }
   }
   this.bus.addListener(listener);
@@ -104,12 +104,12 @@ Androphone.prototype = {
     alert('textRecognised');
   }
   ,
-  removeCurrent : function (  ){
-    alert('removeCurrent');
-  }
-  ,
   color : function ( code_color ){
     alert('color');
+  }
+  ,
+  removeCurrent : function (  ){
+    alert('removeCurrent');
   }
   ,
   gpsLocation : function ( minutes , seconds , degrees ){
