@@ -10,7 +10,7 @@
 function beginSession() {
   if (startSession) {
     manager = new Manager(sessionName);
-    // Tester voir si ça marche toujours 
+    
     androphone = manager.getAndrophone(_location, "Xavier");
     //androphone = manager.getAndrophone(_location, "");
     paint = manager.getPaint("", "");
