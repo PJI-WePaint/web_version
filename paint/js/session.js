@@ -21,75 +21,78 @@ function display_sessions() {
       noInformations = false;
       jQuery("#dialog_sessions .dialog_content loader").html("");
     }
-    // test function add 
-    content.append("<div id='sessions'>");
-    content = jQuery("#dialog_sessions .dialog_content #sessions");
-    jQuery.each(sessions, function(key, value) {
-      if (value != undefined) content.append("<div class='session' data-name='" + value + "' onClick='choose_session(this);'>" + value.split(beginNameSession)[1] + "</div>");
-    });
-    //content.append("</div>");
+        // test function add 
+        content.append("<div id='sessions'>");
+        content = jQuery("#dialog_sessions .dialog_content #sessions");
+        jQuery.each(sessions, function(key, value) {
+          if (value != undefined) content.append("<div class='session' data-name='" + value + "' onClick='choose_session(this);'>" + value.split(beginNameSession)[1] + "</div>");
+        });
+        //content.append("</div>");
+      }
+    }
+
+    function choose_session(div) {
+    // Do something awesome !!
+    sessionName = jQuery(div).attr("data-name");
+    startSession = true;
+    beginSession();
+    jQuery("#dialog_sessions").dialog('close');
+
   }
-}
 
-function choose_session(div) {
-  // Do something awesome !!
-  sessionName = jQuery(div).attr("data-name");
-  startSession = true;
-  beginSession();
-  jQuery("#dialog_sessions").dialog('close');
+  function create_session() {
+    name = jQuery("#text_session").val();
+    sessionName = beginNameSession + name;
+    startSession = true;
+    beginSession();
+    jQuery("#dialog_sessions").dialog('close');
 
-}
+  }
 
-function create_session() {
-  name = jQuery("#text_session").val();
-  sessionName = beginNameSession + name;
-  startSession = true;
-  beginSession();
-  jQuery("#dialog_sessions").dialog('close');
+  function test_session() {
+    if (!startSession) {
+      alert("You need to choose sessions");
+      jQuery("#dialog_sessions:ui-dialog").dialog("destroy");
+      jQuery("#dialog_sessions").dialog({
+        resizable: false,
+        modal: true,
+        closeOnEscape: false,
+        close: function(event, ui) {
+          test_session();
+        }
+      });
+    }
+  }
 
-}
+  function show_name_session_and_user_name() {
+    var name = sessionName.split("_")[1];
+    jQuery("#link_qrcodes").prepend("<div class=\"item-menu\" id=\"session-name\"><span id=\"session-name\">Name session: " + name + "</span></div>");
+  }
 
-function test_session() {
-  if (!startSession) {
-    alert("You need to choose sessions");
+  jQuery(document).ready(function() {
+    if (noInformations) {
+      jQuery("#dialog_sessions .dialog_content loader").append("<img src='images/ajax-loader.gif' />");
+    }
+
+    // Recup sessions!!
+    fetch_data(urls.wse.getSessionsJson, null, getSessions, "POST");
+
+    // display dialog
     jQuery("#dialog_sessions:ui-dialog").dialog("destroy");
+
     jQuery("#dialog_sessions").dialog({
       resizable: false,
-      height: 200,
       modal: true,
       closeOnEscape: false,
       close: function(event, ui) {
         test_session();
       }
     });
-  }
-}
 
-jQuery(document).ready(function() {
-  if (noInformations) {
-    jQuery("#dialog_sessions .dialog_content loader").append("<img src='images/ajax-loader.gif' />");
-  }
+    jQuery("#submit_session").click(create_session);
 
-  // Recup sessions!!
-  fetch_data(urls.wse.getSessionsJson, null, getSessions, "POST");
+    jQuery("#dialog_sessions").dialog({
 
-  // display dialog
-  jQuery("#dialog_sessions:ui-dialog").dialog("destroy");
-
-  jQuery("#dialog_sessions").dialog({
-    resizable: false,
-    height: 200,
-    modal: true,
-    closeOnEscape: false,
-    close: function(event, ui) {
-      test_session();
-    }
-  });
-
-  jQuery("#submit_session").click(create_session);
-
-  jQuery("#dialog_sessions").dialog({
+    });
 
   });
-
-});

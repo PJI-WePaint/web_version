@@ -44,6 +44,13 @@ header{
   color: #3E3D3D;
 }
 
+#session-name{
+  vertical-align: 50%;
+  color: #3E3D3D;
+  height: 38px;
+
+}
+
 #qrcode{
   font-size: 12px;
   display: inline-block;

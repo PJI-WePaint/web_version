@@ -9,6 +9,7 @@
 
 function beginSession() {
   if (startSession) {
+    show_name_session_and_user_name();
     manager = new Manager(sessionName);
     
     androphone = manager.getAndrophone(_location, "Xavier");
