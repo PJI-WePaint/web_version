@@ -9,6 +9,7 @@
 
 function beginSession() {
   if (startSession) {
+    get_last_id();
     show_name_session_and_user_name();
     manager = new Manager(sessionName);
     
@@ -36,7 +37,7 @@ function beginSession() {
       }
       var dx = x - this.compassX;
       var dy = y - this.compassY;
-      move_object(current,dx*2,dy*2);
+      move_object(current.id,dx*2,dy*2,false);
       this.compassX = x;
       this.compassY = y;
     }
@@ -54,7 +55,7 @@ function beginSession() {
       }
       var dx = this.acceleroX - x;
       var dy = this.acceleroY - y;
-       move_object(current,dx*20,dy*20);
+      move_object(current.id,dx*20,dy*20,false);
       this.acceleroX = x;
       this.acceleroY = y;
       var dx =x;
@@ -100,5 +101,16 @@ function beginSession() {
       remove_object(null, idObject, false);
     }
 
+    paint.changeCurrent = function(idObject, idUser){
+      change_current_by_user(idObject,idUser);
+    }
+
+    paint.joinSession = function(idUser){
+      new_user(idUser);
+    }
+
+    paint.moveObject = function(dx, dy, idObject){
+      move_object(idObject, dx, dy,false);
+    }
   }
 }

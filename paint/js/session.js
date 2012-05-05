@@ -75,7 +75,7 @@ function display_sessions() {
     }
 
     // Recup sessions!!
-    fetch_data(urls.wse.getSessionsJson, null, getSessions, "POST");
+    fetch_data(urls.wse.getSessionsJson, null,"POST", getSessions);
 
     // display dialog
     jQuery("#dialog_sessions:ui-dialog").dialog("destroy");

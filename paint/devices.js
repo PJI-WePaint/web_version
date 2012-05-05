@@ -63,7 +63,7 @@ Androphone = function (bus, location, locationParams)
       //alert('error during receiving WSE message : '+message);
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
-      console.trace();
+      console.trace()
     }
   }
   this.bus.addListener(listener);
@@ -148,9 +148,21 @@ Paint = function (bus, location, locationParams)
     try{
       var objMsg=this.object.objMsg;
       if (stringListEquals(message.location, objMsg.location, message.locationParams, objMsg.locationParams, objMsg.object, message.object)){
+        if (stringListEquals(message.action,'moveObject')) {
+          var actionParams=message.actionParams;
+          this.object.moveObject(actionParams.dx , actionParams.dy , actionParams.idObject);
+        }
+        if (stringListEquals(message.action,'changeCurrent')) {
+          var actionParams=message.actionParams;
+          this.object.changeCurrent(actionParams.idObject , actionParams.idUser);
+        }
         if (stringListEquals(message.action,'createObject')) {
           var actionParams=message.actionParams;
           this.object.createObject(actionParams.idObject , actionParams.typeObject);
+        }
+        if (stringListEquals(message.action,'joinSession')) {
+          var actionParams=message.actionParams;
+          this.object.joinSession(actionParams.idUser);
         }
         if (stringListEquals(message.action,'removeObject')) {
           var actionParams=message.actionParams;
@@ -159,10 +171,7 @@ Paint = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      //alert('error during receiving WSE message : '+message);
-      console.log('error during receiving WSE message : ' + message);
-      console.log(ex);
-      console.trace();
+     
     }
   }
   this.bus.addListener(listener);
@@ -178,6 +187,25 @@ Paint.prototype = {
     this.bus.sendMessage(this.objMsg);
   }
   ,
+  moveObjectServeur : function ( dx , dy , idObject ){
+    this.objMsg.action='moveObject';
+    var actionParams = {};
+    actionParams.dx=dx;
+    actionParams.dy=dy;
+    actionParams.idObject=idObject;
+    this.objMsg.actionParams=actionParams;
+    this.bus.sendMessage(this.objMsg);
+  }
+  ,
+  changeCurrentServeur : function ( idObject , idUser ){
+    this.objMsg.action='changeCurrent';
+    var actionParams = {};
+    actionParams.idObject=idObject;
+    actionParams.idUser=idUser;
+    this.objMsg.actionParams=actionParams;
+    this.bus.sendMessage(this.objMsg);
+  }
+  ,
   createObjectServeur : function ( idObject , typeObject ){
     this.objMsg.action='createObject';
     var actionParams = {};
@@ -187,8 +215,28 @@ Paint.prototype = {
     this.bus.sendMessage(this.objMsg);
   }
   ,
+  joinSessionServeur : function ( idUser ){
+    this.objMsg.action='joinSession';
+    var actionParams = {};
+    actionParams.idUser=idUser;
+    this.objMsg.actionParams=actionParams;
+    this.bus.sendMessage(this.objMsg);
+  }
+  ,
+  moveObject : function ( dx , dy , idObject ){
+    alert('moveObject');
+  }
+  ,
+  changeCurrent : function ( idObject , idUser ){
+    alert('changeCurrent');
+  }
+  ,
   createObject : function ( idObject , typeObject ){
     alert('createObject');
+  }
+  ,
+  joinSession : function ( idUser ){
+    alert('joinSession');
   }
   ,
   removeObject : function ( idObject ){

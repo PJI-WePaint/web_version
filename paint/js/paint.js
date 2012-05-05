@@ -20,9 +20,9 @@ var start = function() {
     set_current(this);
   },
   move = function(dx, dy) {
-    this.attr({
-      transform: "...T" + (dx - ox) + "," + (dy - oy)
-    });
+    var x = (dx - ox);
+    var y = (dy - oy)
+    move_object(this.id, x, y, true);
     ox = dx;
     oy = dy;
   },
@@ -94,8 +94,11 @@ function add_element(element, id, server) {
         remove_object(this, id_element, true);
       }
     });
-    set_current(object);
-    if (server) paint.createObjectServeur(id_element, element);
+    
+    if (server){ 
+      set_current(object);
+      paint.createObjectServeur(id_element, element);
+    }
   }
 }
 
@@ -125,7 +128,6 @@ function set_current(object) {
       stroke: "none"
     });
   }
-  androphone.resetAcceleroValues();
   current = object;
   object.attr({
     stroke: "#FF0101",
@@ -133,13 +135,21 @@ function set_current(object) {
     "stroke-linejoin": "round",
     "stroke-linecap": "round"
   });
+  change_current_by_user(current.id, current_id);
+  paint.changeCurrentServeur(current.id, current_id);
+
 }
 
-function move_object(object, dx, dy) {
-  if (current != null) {
-    current.attr({
+function move_object(object_id, dx, dy, server) {
+  var object = paper_paint.getById(object_id);
+  console.log(object_id);
+  if (object != null) {
+    object.attr({
       transform: "...T" + (dx) + "," + (dy)
     });
+    if(server){
+     paint.moveObjectServeur(dx,dy,object_id);
+    }
   }
 }
 
@@ -156,6 +166,11 @@ function remove_object(object, id, server) {
   }
   object.remove();
   if (current != null && object.id == current.id) current = null;
+  users.filter(function (user) { 
+    if(user.id_object == object.id){
+      user.id_object = null
+    }
+  });
   if (server) paint.removeObjectServeur(new_id);
 }
 

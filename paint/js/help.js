@@ -24,7 +24,7 @@ if (typeof String.prototype.endsWith != 'function') {
   };
 }
 
-function fetch_data(url, data, cb, method){
+function fetch_data(url, data, method, cb){
   jQuery.ajax({
     url: url,
     data: data,

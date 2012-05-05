@@ -1,5 +1,1 @@
-{
-  "users" : [
-    {"id":3234,"name":"utilisateur-3234", "connect_at":"datetime"} 
-  ]
-}
+{"users":[{"id":1,"connect_at":"03-05-2012 21:10","type":"android"},{"id":"2","connect_at":"04-05-2012 17:43","type":"PC"},{"id":"21","connect_at":"04-05-2012 17:43","type":"PC"},{"id":"211","connect_at":"04-05-2012 17:46","type":"PC"},{"id":"2111","connect_at":"04-05-2012 17:46","type":"PC"},{"id":"21111","connect_at":"04-05-2012 17:47","type":"PC"},{"id":"211111","connect_at":"04-05-2012 17:47","type":"PC"},{"id":"2111111","connect_at":"04-05-2012 18:08","type":"PC"},{"id":"21111111","connect_at":"04-05-2012 18:08","type":"PC"}]}
