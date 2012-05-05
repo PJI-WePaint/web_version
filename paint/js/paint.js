@@ -142,7 +142,6 @@ function set_current(object) {
 
 function move_object(object_id, dx, dy, server) {
   var object = paper_paint.getById(object_id);
-  console.log(object_id);
   if (object != null) {
     object.attr({
       transform: "...T" + (dx) + "," + (dy)
@@ -204,4 +203,19 @@ function change_color_object(id, code_color){
 jQuery(document).ready(function() {
   paper_paint = Raphael("paper_paint", 850, 500);
   create_menu();
+
+  window.onbeforeunload = function (e) {
+    if(startSession){
+      paint.quitSessionServeur(current_id);
+    }
+    e = e || window.event;
+
+    // For IE and Firefox prior to version 4
+    if (e) {
+      e.returnValue = 'Quit';
+    }
+
+    // For Chrome, Safari and Opera 12+
+    return 'Quit';
+  };
 });

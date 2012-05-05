@@ -64,7 +64,7 @@ Androphone = function (bus, location, locationParams)
       //alert('error during receiving WSE message : '+message);
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
-      console.trace()
+      console.trace();
     }
   }
   this.bus.addListener(listener);
@@ -153,6 +153,10 @@ Paint = function (bus, location, locationParams)
           var actionParams=message.actionParams;
           this.object.moveObject(actionParams.dx , actionParams.dy , actionParams.idObject);
         }
+        if (stringListEquals(message.action,'quitSession')) {
+          var actionParams=message.actionParams;
+          this.object.quitSession(actionParams.idUser);
+        }
         if (stringListEquals(message.action,'changeCurrent')) {
           var actionParams=message.actionParams;
           this.object.changeCurrent(actionParams.idObject , actionParams.idUser);
@@ -172,7 +176,10 @@ Paint = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-     
+      //alert('error during receiving WSE message : '+message);
+      console.log('error during receiving WSE message : ' + message);
+      console.log(ex);
+      console.trace();
     }
   }
   this.bus.addListener(listener);
@@ -194,6 +201,14 @@ Paint.prototype = {
     actionParams.dx=dx;
     actionParams.dy=dy;
     actionParams.idObject=idObject;
+    this.objMsg.actionParams=actionParams;
+    this.bus.sendMessage(this.objMsg);
+  }
+  ,
+  quitSessionServeur : function ( idUser ){
+    this.objMsg.action='quitSession';
+    var actionParams = {};
+    actionParams.idUser=idUser;
     this.objMsg.actionParams=actionParams;
     this.bus.sendMessage(this.objMsg);
   }
@@ -226,6 +241,10 @@ Paint.prototype = {
   ,
   moveObject : function ( dx , dy , idObject ){
     alert('moveObject');
+  }
+  ,
+  quitSession : function ( idUser ){
+    alert('quitSession');
   }
   ,
   changeCurrent : function ( idObject , idUser ){

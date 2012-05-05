@@ -113,5 +113,9 @@ function beginSession() {
     paint.moveObject = function(dx, dy, idObject){
       move_object(idObject, dx, dy,false);
     }
+
+    paint.quitSession = function (idUser){
+      remove_user(idUser);
+    }
   }
 }

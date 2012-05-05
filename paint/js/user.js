@@ -28,3 +28,8 @@ function change_current_by_user(idObject, idUser){
     }
   });
 }
+
+function remove_user(id_user){
+ id = findIndexByKeyValue(users,'id',id_user);
+ users.splice(id,1);
+}

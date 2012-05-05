@@ -2,7 +2,7 @@
 
 $action = $_GET['action'];
 $name_user = isset($_GET['name']) ? $_GET['name'] : NULL;
-$id = isset($_GET['id']) ? $_GET['id'] : NULL;
+$id = isset($_GET['id']) ? intval($_GET['id']) : NULL;
 $file = "base.json";
 $type = isset($_GET['type']) ? $_GET['type'] : NULL;
 
@@ -82,10 +82,10 @@ function get_last_id($return_json)
   $users = sortByOneKey($users,"id");
   $last_user = end($users);
   if($return_json){
-    $message = array("last_id" => $last_user["id"]);
+    $message = array("last_id" => intval($last_user["id"]));
     render($message);
   }else{
-    return $last_user["id"];
+    return intval($last_user["id"]);
   }
 
 }
