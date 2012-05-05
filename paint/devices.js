@@ -5,7 +5,8 @@ function stringListEquals (){
   return true;
 }
 Manager = function (session){
-  wse.joinSession(session);
+  //wse.joinSession(session);
+  wse.joinSessionAndReplay(session);
   this.bus=wse;
 }
 Androphone = function (bus, location, locationParams)

@@ -53,6 +53,29 @@ wse =
 	},
 	
 	ipAddressBackError : function () {},
+
+	joinSessionAndReplay : function(sessionName){
+		this.name = sessionName;
+		new Ajax.Request(wse.server,
+		    {
+		        method:'post',
+		        parameters: { 
+		        	action : 'joinSession', 
+		        	sessionName : wse.name,
+		        },
+		        onSuccess: wse.joinSessionRePlayCallBack,
+		        onFailure: wse.joinSessionCallBackError 
+		    }
+		);
+	},
+
+	joinSessionRePlayCallBack : function (transport, json){
+		if(json.lastIndex < 0)
+			wse.counter = json.lastIndex;
+		else
+			wse.counter = 0
+		wse.beingUpdated();
+	},
 	
 	joinSession : function (sessionName) 
 	{
