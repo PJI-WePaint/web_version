@@ -1,14 +1,16 @@
 var current_id;
 var users = [];
 function get_last_id(){
-  jQuery.getJSON("BDD/user.php",{action : "get_last_id"},function(data){
+  var name = sessionName.split("_")[1]
+  jQuery.getJSON("BDD/user.php",{action : "get_last_id", session: name},function(data){
     current_id = data.last_id + 1;
     create_current_user();
   });
 }
 
 function create_current_user(){
-  fetch_data("BDD/user.php", {action : "create", id: current_id, type: "PC"},"GET", function(data){
+  var name = sessionName.split("_")[1]
+  fetch_data("BDD/user.php", {action : "create", id: current_id, type: "PC", session: name},"GET", function(data){
     if(data.errors)
       current_id = data.new_id;
     paint.joinSessionServeur(current_id);

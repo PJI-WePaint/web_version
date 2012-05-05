@@ -1,11 +1,14 @@
 <?php
 
 $action = $_GET['action'];
+$session = $_GET['session'];
+
 $name_user = isset($_GET['name']) ? $_GET['name'] : NULL;
 $id = isset($_GET['id']) ? intval($_GET['id']) : NULL;
-$file = "base.json";
 $type = isset($_GET['type']) ? $_GET['type'] : NULL;
 
+$base_file = "base_";
+$file = $base_file . $session .".json";
 function sortByOneKey(array $array, $key, $asc = true) {
     $result = array();
         
@@ -28,6 +31,17 @@ function sortByOneKey(array $array, $key, $asc = true) {
     return $result;
 }
 
+function findIndexByKeyValue($obj, $key, $value)
+{
+    $lenght = count($obj);
+    for ($i = 0; $i < $lenght; $i++) {
+        if ($obj[$i][$key] == $value) {
+            return $i;
+        }
+    }
+    return NULL;
+}
+
   
 function create(){
   global $name_user;
@@ -47,10 +61,25 @@ function create(){
   array_push($users, $new_user);
   create_in_files(array("users" => $users));
   render($message);
-  
-
 }
 
+function remove(){
+  global $name_user;
+  global $id;
+  global $type;
+  $data = recup_all_users();
+  $users= $data["users"];
+  $users = sortByOneKey($users,"id");
+  $index = findIndexByKeyValue($users,"id",$id);
+  if ($index != NULL) {
+    unset($users[$index]);
+    $message = array("errors" => false);
+    create_in_files($users);
+  }else{
+    $message = array("errors" => true, "message" => "not find id");
+  }
+  render($message);
+}
 
   // TODO : Faire fonction qui ifExist user
 function exist_id($data, $id){
@@ -98,22 +127,28 @@ function render($message){
 
 function recup_all_users(){
   global $file;
-  if(filesize($file) != NULL){
-    $all = "";
-    $handle = fopen($file, "r") or die("can't open file");
-    if ($handle) {
-      while (($buffer = fgets($handle, 4096)) !== false) {
-        $all = $all.$buffer;
+  if(file_exists($file)){
+    if(filesize($file) != NULL){
+      $all = "";
+      $handle = fopen($file, "r") or die("can't open file");
+      if ($handle) {
+        while (($buffer = fgets($handle, 4096)) !== false) {
+          $all = $all.$buffer;
+        }
+        if (!feof($handle)) {
+          echo "Error: unexpected fgets() fail\n";
+        }
+        fclose($handle);
       }
-      if (!feof($handle)) {
-        echo "Error: unexpected fgets() fail\n";
-      }
-      fclose($handle);
+      $json = json_decode($all, true);
+      return $json;
+    }else{
+      return NULL;
     }
-    $json = json_decode($all, true);
-    return $json;
   }else{
-    return NULL;
+    $data = array("users" => array());
+    create_in_files($data);
+    return $data;
   }
 }
 
@@ -130,6 +165,9 @@ try {
     break;
     case 'create':
     create();
+    break;
+    case 'remove':
+    remove();
     break;
     default:
     errors();
