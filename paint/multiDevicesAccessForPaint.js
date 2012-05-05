@@ -7,6 +7,7 @@
 //
 
 
+
 function beginSession() {
   if (startSession) {
     get_last_id();
