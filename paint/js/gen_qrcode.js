@@ -55,14 +55,19 @@ function updateQRCode(text) {
 }
 
 function CreateJson_parameter() {
-  var return_Json = JSON.stringify({
-    "url": location.hostname,
-    "sessionName": sessionName,
-    "_location": _location,
-    "location_parameter": location_parameter
+  console.log("boloss");
+  var return_Json;
+  var ip;
+  jQuery.getJSON("helper/getIpAddress.php",null,function(data){
+      ip = data.ip;
+      return_Json =  JSON.stringify({
+        "url": ip,
+        "sessionName": sessionName,
+        "_location": _location,
+        "location_parameter": location_parameter
+      });
+      updateQRCode(return_Json);
   });
-
-  return return_Json;
 }
 
 
@@ -73,8 +78,7 @@ jQuery(document).ready(function($) {
     modal: true
   })
   jQuery("#configuration").click(function() {
-    text = CreateJson_parameter();
-    updateQRCode(text);
+    CreateJson_parameter();
   });
 
   jQuery("#mobile-apk").click(function() {

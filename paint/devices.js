@@ -5,7 +5,7 @@ function stringListEquals (){
   return true;
 }
 Manager = function (session){
-  //wse.joinSession(session);
+    //wse.joinSession(session);
   wse.joinSessionAndReplay(session);
   this.bus=wse;
 }
@@ -22,6 +22,10 @@ Androphone = function (bus, location, locationParams)
     try{
       var objMsg=this.object.objMsg;
       if (stringListEquals(message.location, objMsg.location, message.locationParams, objMsg.locationParams, objMsg.object, message.object)){
+        if (stringListEquals(message.action,'joinSessionPaint')) {
+          var actionParams=message.actionParams;
+          this.object.joinSessionPaint(actionParams.idUser);
+        }
         if (stringListEquals(message.action,'message')) {
           var actionParams=message.actionParams;
           this.object.message(actionParams.message);
@@ -61,7 +65,6 @@ Androphone = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      //alert('error during receiving WSE message : '+message);
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
       console.trace();
@@ -95,6 +98,10 @@ Androphone.prototype = {
     actionParams.position=position;
     this.objMsg.actionParams=actionParams;
     this.bus.sendMessage(this.objMsg);
+  }
+  ,
+  joinSessionPaint : function ( idUser ){
+    alert('joinSessionPaint');
   }
   ,
   message : function ( message ){
@@ -176,7 +183,6 @@ Paint = function (bus, location, locationParams)
       }
     }
     catch (ex) {
-      //alert('error during receiving WSE message : '+message);
       console.log('error during receiving WSE message : ' + message);
       console.log(ex);
       console.trace();

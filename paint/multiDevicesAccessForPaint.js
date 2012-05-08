@@ -89,6 +89,10 @@ function beginSession() {
       remove_object(null, null, false);
     }
 
+    androphone.joinSessionPaint = function ( idUser ){
+      new_user(idUser);
+    }
+
     androphone.resetCompassValues();
     androphone.resetAcceleroValues();
 
