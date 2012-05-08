@@ -30,6 +30,12 @@ function change_current_by_user(idObject, idUser){
     }
   });
 }
+function get_id_object_by_user(id_user){
+  var id_object;
+  id = findIndexByKeyValue(users,'id',id_user);
+  return users[id]["id_object"];
+
+}
 
 function remove_user(id_user){
  id = findIndexByKeyValue(users,'id',id_user);

@@ -5,7 +5,6 @@ function stringListEquals (){
   return true;
 }
 Manager = function (session){
-    //wse.joinSession(session);
   wse.joinSessionAndReplay(session);
   this.bus=wse;
 }
@@ -26,41 +25,49 @@ Androphone = function (bus, location, locationParams)
           var actionParams=message.actionParams;
           this.object.joinSessionPaint(actionParams.idUser);
         }
-        if (stringListEquals(message.action,'message')) {
-          var actionParams=message.actionParams;
-          this.object.message(actionParams.message);
-        }
         if (stringListEquals(message.action,'textRecognised')) {
           var actionParams=message.actionParams;
-          this.object.textRecognised(actionParams.text);
+          this.object.textRecognised(actionParams.text , actionParams.idUser);
         }
         if (stringListEquals(message.action,'color')) {
           var actionParams=message.actionParams;
-          this.object.color(actionParams.code_color);
+          this.object.color(actionParams.code_color , actionParams.idUser);
         }
         if (stringListEquals(message.action,'removeCurrent')) {
           var actionParams=message.actionParams;
-          this.object.removeCurrent();
+          this.object.removeCurrent(actionParams.idUser);
         }
         if (stringListEquals(message.action,'gpsLocation')) {
           var actionParams=message.actionParams;
-          this.object.gpsLocation(actionParams.minutes , actionParams.seconds , actionParams.degrees);
+          this.object.gpsLocation(actionParams.minutes , actionParams.seconds , actionParams.idUser , actionParams.degrees);
         }
         if (stringListEquals(message.action,'qrCode')) {
           var actionParams=message.actionParams;
-          this.object.qrCode(actionParams.content);
+          this.object.qrCode(actionParams.content , actionParams.idUser);
+        }
+        if (stringListEquals(message.action,'endMove')) {
+          var actionParams=message.actionParams;
+          this.object.endMove(actionParams.idUser);
+        }
+        if (stringListEquals(message.action,'beginMove')) {
+          var actionParams=message.actionParams;
+          this.object.beginMove(actionParams.idUser);
         }
         if (stringListEquals(message.action,'compass')) {
           var actionParams=message.actionParams;
-          this.object.compass(actionParams.z , actionParams.y , actionParams.x);
+          this.object.compass(actionParams.idUser , actionParams.z , actionParams.y , actionParams.x);
         }
         if (stringListEquals(message.action,'light')) {
           var actionParams=message.actionParams;
-          this.object.light(actionParams.lumens);
+          this.object.light(actionParams.idUser , actionParams.lumens);
+        }
+        if (stringListEquals(message.action,'addObject')) {
+          var actionParams=message.actionParams;
+          this.object.addObject(actionParams.message , actionParams.idUser);
         }
         if (stringListEquals(message.action,'accelerometer')) {
           var actionParams=message.actionParams;
-          this.object.accelerometer(actionParams.z , actionParams.y , actionParams.x);
+          this.object.accelerometer(actionParams.idUser , actionParams.z , actionParams.y , actionParams.x);
         }
       }
     }
@@ -104,39 +111,47 @@ Androphone.prototype = {
     alert('joinSessionPaint');
   }
   ,
-  message : function ( message ){
-    alert('message');
-  }
-  ,
-  textRecognised : function ( text ){
+  textRecognised : function ( text , idUser ){
     alert('textRecognised');
   }
   ,
-  color : function ( code_color ){
+  color : function ( code_color , idUser ){
     alert('color');
   }
   ,
-  removeCurrent : function (  ){
+  removeCurrent : function ( idUser ){
     alert('removeCurrent');
   }
   ,
-  gpsLocation : function ( minutes , seconds , degrees ){
+  gpsLocation : function ( minutes , seconds , idUser , degrees ){
     alert('gpsLocation');
   }
   ,
-  qrCode : function ( content ){
+  qrCode : function ( content , idUser ){
     alert('qrCode');
   }
   ,
-  compass : function ( z , y , x ){
+  endMove : function ( idUser ){
+    alert('endMove');
+  }
+  ,
+  beginMove : function ( idUser ){
+    alert('beginMove');
+  }
+  ,
+  compass : function ( idUser , z , y , x ){
     alert('compass');
   }
   ,
-  light : function ( lumens ){
+  light : function ( idUser , lumens ){
     alert('light');
   }
   ,
-  accelerometer : function ( z , y , x ){
+  addObject : function ( message , idUser ){
+    alert('addObject');
+  }
+  ,
+  accelerometer : function ( idUser , z , y , x ){
     alert('accelerometer');
   }
 }

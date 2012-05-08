@@ -17,18 +17,7 @@ function beginSession() {
     androphone = manager.getAndrophone(_location, "Xavier");
     //androphone = manager.getAndrophone(_location, "");
     paint = manager.getPaint("", "");
-
-    
-    // QR CODE EVENTS
-    //
-   androphone.qrCode = function(content) {
-      var color = content;
-      if (shiftPressed) {
-        current.__object.setStroke(color);
-        current.__object.actualStroke = color;
-      } else current.__object.setFill(color);
-      this.resetCompassValues();
-    }
+  
         // COMPASS EVENTS
     //
     androphone.compass = function(x, y, z) {
@@ -38,7 +27,7 @@ function beginSession() {
       }
       var dx = x - this.compassX;
       var dy = y - this.compassY;
-      move_object(current.id,dx*2,dy*2,false);
+      moveobject(current.id,dx*2,dy*2,false);
       this.compassX = x;
       this.compassY = y;
     }
@@ -70,23 +59,23 @@ function beginSession() {
 
     // MESSAGE EVENTS
     //
-    androphone.message = function(message) {
-      add_element(message, null,false);
-      this.resetCompassValues();
-      this.resetAcceleroValues();
+    androphone.addObject = function(message, idUser) {
+      console.log("what !!");
+      add_element(message, null,false, idUser);
+      //this.resetCompassValues();
+      //this.resetAcceleroValues();
     }
 
-    androphone.textRecognised = function(text) {
-      add_element(text,null,false);
-      this.resetCompassValues();
+    androphone.textRecognised = function(text, idUser) {
+      add_element(text,null,false, idUser);
     }
 
-    androphone.color = function(code_color){
-      change_color_object(null,code_color);
+    androphone.color = function(code_color, idUser){
+      change_color_object(null,code_color, idUser);
     }
 
-    androphone.removeCurrent = function(){
-      remove_object(null, null, false);
+    androphone.removeCurrent = function(idUser){
+      remove_object(null, null, false, idUser);
     }
 
     androphone.joinSessionPaint = function ( idUser ){

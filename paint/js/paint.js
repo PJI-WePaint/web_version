@@ -65,7 +65,9 @@ function create_menu() {
   });
 }
 
-function add_element(element, id, server) {
+function add_element(element, id, server, id_user) {
+  console.log(id_user);
+  id_user = (typeof id_user == "undefined")? null:id_user;
   if (id != null) id_element = id;
   else id_element++;
   var object = null;
@@ -98,6 +100,9 @@ function add_element(element, id, server) {
     if (server){ 
       set_current(object);
       paint.createObjectServeur(id_element, element);
+    }
+    if (id_user != null) {
+      change_current_by_user(object.id, id_user);
     }
   }
 }
@@ -152,11 +157,16 @@ function move_object(object_id, dx, dy, server) {
   }
 }
 
-function remove_object(object, id, server) {
+function remove_object(object, id, server, id_user) {
+  id_user = (typeof id_user == "undefined")? null:id_user;
   var new_id;
   if (object != null) {
     new_id = object.id;
   } else if(id != null){
+    object = paper_paint.getById(id);
+    new_id = id;
+  }else if (id_user != null){
+    id = get_id_object_by_user(id_user);
     object = paper_paint.getById(id);
     new_id = id;
   }else{
@@ -181,23 +191,28 @@ function create_object_color(code_color){
   color = {
     fill: code_color
   }
-  color_menu.attr({fill: code_color});
+  //color_menu.attr({fill: code_color});
 }
 
-function change_color_object(id, code_color){
+function change_color_object(id, code_color, id_user){
+  id_user = (typeof id_user == "undefined")? null:id_user;
   create_object_color(code_color);
   var object
+
   if(id != null){
    object = paper_paint.getById(id);
+  }else if (id_user != null){
+    id = get_id_object_by_user(id_user);
+    object = paper_paint.getById(id);
   }else{
     object = current;
   }
   if(object != null){
     object.attr(color || default_color);
     androphone.returnColor(code_color,true);
-  }else{
+  }/*else{
     androphone.returnColor(code_color,false);
-  }
+  }*/
 }
 
 jQuery(document).ready(function() {
