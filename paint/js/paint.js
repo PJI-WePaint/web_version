@@ -66,7 +66,6 @@ function create_menu() {
 }
 
 function add_element(element, id, server, id_user) {
-  console.log(id_user);
   id_user = (typeof id_user == "undefined")? null:id_user;
   if (id != null) id_element = id;
   else id_element++;

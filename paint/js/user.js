@@ -14,12 +14,12 @@ function create_current_user(){
     if(data.errors)
       current_id = data.new_id;
     paint.joinSessionServeur(current_id);
-    users.push({id: current_id, id_object: null});
+    users.push({id: current_id, id_object: null, ox : 0, oy: 0});
   });
 }
 
 function new_user(idUser){
-  users.push({id: idUser, id_object : null});
+  users.push({id: idUser, id_object : null, ox : 0, oy: 0});
 }
 
 
@@ -40,4 +40,15 @@ function get_id_object_by_user(id_user){
 function remove_user(id_user){
  id = findIndexByKeyValue(users,'id',id_user);
  users.splice(id,1);
+}
+
+function change_origin_by_user (id_user,ox,oy) {
+  id = findIndexByKeyValue(users,'id',id_user);
+  users[id].ox = ox;
+  users[id].oy = oy; 
+}
+
+function get_origin_by_user (id_user) {
+  id = findIndexByKeyValue(users,'id',id_user);
+  return {ox: users[id].ox, oy:users[id].oy};
 }

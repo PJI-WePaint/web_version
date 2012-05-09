@@ -17,19 +17,27 @@ function beginSession() {
     androphone = manager.getAndrophone(_location, "Xavier");
     //androphone = manager.getAndrophone(_location, "");
     paint = manager.getPaint("", "");
+
+
+    androphone.beginMove = function(idUser){
+      change_origin_by_user (idUser,0,0);
+    }
+
+    androphone.endMove = function(idUser){
+      change_origin_by_user (idUser,0,0);
+    }
   
-        // COMPASS EVENTS
+    // COMPASS EVENTS
     //
-    androphone.compass = function(x, y, z) {
-      if (this.compassX == 500) {
-        this.compassX = x;
-        this.compassY = y;
+    androphone.compass = function(idUser,x, y, z) {
+      var origin = get_origin_by_user(idUser);
+      var dx = x - origin.ox;
+      var dy = y - origin.oy;
+      id = findIndexByKeyValue(users,'id',idUser);
+      if (users[id].id_object != null){
+        move_object(users[id].id_object, dx*2, dy*2, false);
+        change_origin_by_user (idUser,x,y);
       }
-      var dx = x - this.compassX;
-      var dy = y - this.compassY;
-      moveobject(current.id,dx*2,dy*2,false);
-      this.compassX = x;
-      this.compassY = y;
     }
 
     androphone.resetCompassValues = function() {
@@ -38,18 +46,15 @@ function beginSession() {
 
     // ACCELEROMETER EVENTS
     //
-    androphone.accelerometer = function(x, y, z) {
-     if (this.acceleroX == 500) {
-        this.acceleroX = x;
-        this.acceleroY = y;
+    androphone.accelerometer = function(idUser,x, y, z) {
+      var origin = get_origin_by_user(idUser);
+      var dx = x - origin.ox;
+      var dy = y - origin.oy;
+      id = findIndexByKeyValue(users,'id',idUser);
+      if (users[id].id_object != null){
+        move_object(users[id].id_object, dx*20, dy*20, false);
+        change_origin_by_user (idUser,x,y);
       }
-      var dx = this.acceleroX - x;
-      var dy = this.acceleroY - y;
-      move_object(current.id,dx*20,dy*20,false);
-      this.acceleroX = x;
-      this.acceleroY = y;
-      var dx =x;
-      var dy = y;
      
     }
 
@@ -60,7 +65,6 @@ function beginSession() {
     // MESSAGE EVENTS
     //
     androphone.addObject = function(message, idUser) {
-      console.log("what !!");
       add_element(message, null,false, idUser);
       //this.resetCompassValues();
       //this.resetAcceleroValues();
