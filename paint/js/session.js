@@ -1,17 +1,24 @@
+var timeoutGetSession;
 function getSessions(json) {
-  sessions = json.files;
-  var temp = sessions;
-  var value;
-  var i;
-  var length = sessions.length;
-  for (i = 0; i < length; i++) {
-    value = sessions[i];
-    if (value != undefined && !value.startsWith(beginNameSession)) {
-      delete temp[i];
+  console.log(json);
+  if (!startSession){
+    sessions = json.files;
+    var temp = sessions;
+    var value;
+    var i;
+    var length = sessions.length;
+    for (i = 0; i < length; i++) {
+      value = sessions[i];
+      if (value != undefined && !value.startsWith(beginNameSession)) {
+        delete temp[i];
+      }
     }
+    sessions = temp;
+    display_sessions();
+    timeoutGetSession = setTimeout("fetch_data(urls.wse.getSessionsJson, null,\"POST\", getSessions)","1000");
+  }else{
+    clearTimeout(timeoutGetSession);
   }
-  sessions = temp;
-  display_sessions();
 }
 
 function display_sessions() {
@@ -21,6 +28,7 @@ function display_sessions() {
       noInformations = false;
       jQuery("#dialog_sessions .dialog_content loader").html("");
     }
+        jQuery("#dialog_sessions .dialog_content").html("");
         // test function add 
         content.append("<div id='sessions'>");
         content = jQuery("#dialog_sessions .dialog_content #sessions");
@@ -71,11 +79,10 @@ function display_sessions() {
 
   jQuery(document).ready(function() {
     if (noInformations) {
-      jQuery("#dialog_sessions .dialog_content loader").append("<img src='images/ajax-loader.gif' />");
-    }
-
+      jQuery("#dialog_sessions .dialog_content .loader").append("<img src='images/ajax-loader.gif' />");
+    };
     // Recup sessions!!
-    fetch_data(urls.wse.getSessionsJson, null,"POST", getSessions);
+    timeoutGetSession = setTimeout("fetch_data(urls.wse.getSessionsJson, null,\"POST\", getSessions)","1000");
 
     // display dialog
     jQuery("#dialog_sessions:ui-dialog").dialog("destroy");
