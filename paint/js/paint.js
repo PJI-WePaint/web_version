@@ -1,3 +1,8 @@
+Raphael.fn.triangle = function (cx, cy, r) {
+r *= 1.75;
+return this.path("M".concat(cx, ",", cy, "m0-", r * .58, "l", r * .5, ",", r * .87, "-", r, ",0z"));
+};
+
 var paper_paint;
 var paper_menu;
 var id_element = 0;
@@ -51,7 +56,11 @@ function create_menu() {
     add_element("ellipse", null, true);
   });
 
-  var text = paper_menu.text(30,360,"Color:").attr({
+  var triange = paper_menu.triangle(70,410,50).attr(default_color).attr(default_attr).click(function() {
+    add_element("triangle", null, true);
+  });
+
+  /*var text = paper_menu.text(30,360,"Color:").attr({
     "font-size": "15",
     "font-family": "Arial",
     "fill": "#3E3D3D"
@@ -62,7 +71,7 @@ function create_menu() {
     "stroke-width": 2
   }).click(function(){
     change_color_web();
-  });
+  });*/
 }
 
 function add_element(element, id, server, id_user) {
@@ -82,6 +91,9 @@ function add_element(element, id, server, id_user) {
     break;
   case "ELLIPSE":
     object = add_ellipse();
+    break;
+  case "TRIANGLE":
+    object = add_triangle();
     break;
   default:
     console.log("Element not implemented yet");
@@ -124,6 +136,11 @@ function add_square() {
 function add_ellipse() {
   var ellipse = paper_paint.ellipse(70, 50, 40, 30);
   return ellipse;
+}
+
+function add_triangle(){
+  var triangle = paper_paint.triangle(70,50,50);
+  return triangle;
 }
 
 function set_current(object) {
