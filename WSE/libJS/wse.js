@@ -70,7 +70,6 @@ wse =
 	},
 
 	joinSessionRePlayCallBack : function (transport, json){
-		console.log(json);
 		if(json.lastIndex < 0){
 			wse.counter = json.lastIndex;
 		}else{
@@ -131,7 +130,6 @@ wse =
 	
 	beingUpdated : function () 
 	{
-		console.log("je vais update !");
 		new Ajax.Request(wse.server,
 		    {
 		        method:'post',
@@ -148,7 +146,6 @@ wse =
 
 	beingUpdated_CallBack : function (transport, json) 
 	{
-		console.log(json);
 		if(transport == null || json == null)
 		{
 			wse.beingUpdated();

@@ -32,7 +32,6 @@ function display_sessions() {
     }
 
     function choose_session(div) {
-    // Do something awesome !!
     sessionName = jQuery(div).attr("data-name");
     startSession = true;
     beginSession();
@@ -43,6 +42,7 @@ function display_sessions() {
   function create_session() {
     name = jQuery("#text_session").val();
     sessionName = beginNameSession + name;
+    createSession = true;
     startSession = true;
     beginSession();
     jQuery("#dialog_sessions").dialog('close');

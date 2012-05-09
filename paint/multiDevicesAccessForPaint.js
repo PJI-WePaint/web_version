@@ -18,7 +18,9 @@ function beginSession() {
     paint = manager.getPaint("", "");
 
     get_last_id();
-    wse.beingUpdated();
+    if(createSession){
+      wse.beingUpdated();
+    }
     androphone.beginMove = function(idUser){
       change_origin_by_user (idUser,0,0);
     }
@@ -104,7 +106,6 @@ function beginSession() {
     }
 
     paint.joinSession = function(idUser){
-      console.log("join!!!");
       new_user(idUser);
     }
 

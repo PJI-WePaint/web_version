@@ -55,7 +55,6 @@ function updateQRCode(text) {
 }
 
 function CreateJson_parameter() {
-  console.log("boloss");
   var return_Json;
   var ip;
   jQuery.getJSON("helper/getIpAddress.php",null,function(data){

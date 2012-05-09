@@ -172,14 +172,16 @@ function remove_object(object, id, server, id_user) {
     object = current;
     new_id = current.id;
   }
-  object.remove();
-  if (current != null && object.id == current.id) current = null;
-  users.filter(function (user) { 
-    if(user.id_object == object.id){
-      user.id_object = null
-    }
-  });
-  if (server) paint.removeObjectServeur(new_id);
+  if(object != null){
+    object.remove();
+    if (current != null && object.id == current.id) current = null;
+    users.filter(function (user) { 
+      if(user.id_object == object.id){
+        user.id_object = null
+      }
+    });
+    if (server) paint.removeObjectServeur(new_id);
+  }
 }
 
 function change_color_web(){
