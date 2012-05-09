@@ -190,12 +190,15 @@ function create_object_color(code_color){
   color = {
     fill: code_color
   }
-  //color_menu.attr({fill: code_color});
+  color_menu.attr({fill: code_color});
 }
 
 function change_color_object(id, code_color, id_user){
   id_user = (typeof id_user == "undefined")? null:id_user;
-  create_object_color(code_color);
+  var new_color = {
+    fill: code_color
+  }
+  //create_object_color(code_color);
   var object
 
   if(id != null){
@@ -207,7 +210,7 @@ function change_color_object(id, code_color, id_user){
     object = current;
   }
   if(object != null){
-    object.attr(color || default_color);
+    object.attr(new_color || default_color);
     androphone.returnColor(code_color,true);
   }/*else{
     androphone.returnColor(code_color,false);

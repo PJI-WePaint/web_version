@@ -10,7 +10,6 @@
 
 function beginSession() {
   if (startSession) {
-    get_last_id();
     show_name_session_and_user_name();
     manager = new Manager(sessionName);
     
@@ -18,7 +17,8 @@ function beginSession() {
     //androphone = manager.getAndrophone(_location, "");
     paint = manager.getPaint("", "");
 
-
+    get_last_id();
+    wse.beingUpdated();
     androphone.beginMove = function(idUser){
       change_origin_by_user (idUser,0,0);
     }
@@ -104,6 +104,7 @@ function beginSession() {
     }
 
     paint.joinSession = function(idUser){
+      console.log("join!!!");
       new_user(idUser);
     }
 
