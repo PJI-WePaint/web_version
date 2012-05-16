@@ -69,6 +69,17 @@ function CreateJson_parameter() {
   });
 }
 
+function CreateJsonForApk(){
+  text = location.origin + location.pathname + "attachements/MinyRemote.apk";
+  var return_Json;
+  var ip;
+  jQuery.getJSON("helper/getIpAddress.php",null,function(data){
+      ip = data.ip;
+      text = "http://" + ip + "/paint/attachements/WePaint.apk";
+      updateQRCode(text);
+  });
+}
+
 
 jQuery(document).ready(function($) {
   jQuery("#dialog_qrcode").dialog({
@@ -81,7 +92,7 @@ jQuery(document).ready(function($) {
   });
 
   jQuery("#mobile-apk").click(function() {
-    text = location.origin + location.pathname + "attachements/MinyRemote.apk";
+    CreateJsonForApk();
     updateQRCode(text);
   });
 

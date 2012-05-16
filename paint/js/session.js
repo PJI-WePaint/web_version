@@ -1,6 +1,5 @@
 var timeoutGetSession;
 function getSessions(json) {
-  console.log(json);
   if (!startSession){
     sessions = json.files;
     var temp = sessions;
