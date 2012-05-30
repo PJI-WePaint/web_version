@@ -236,6 +236,21 @@ function change_color_object(id, code_color, id_user){
   }*/
 }
 
+function create_tri_force(){
+  if(startSession){
+    add_element("triangle", null, false);
+    move_object(id_element, 278, 251, false);
+    change_color_object(id_element,"#FFFC00");
+    add_element("triangle", null, false);
+    move_object(id_element, 321, 176, false);
+    change_color_object(id_element,"#FFFC00");
+    add_element("triangle", null, false);
+    move_object(id_element, 364, 251, false);
+    change_color_object(id_element,"#FFFC00");
+
+  }
+}
+
 jQuery(document).ready(function() {
   paper_paint = Raphael("paper_paint", 850, 500);
   create_menu();
@@ -243,15 +258,21 @@ jQuery(document).ready(function() {
   window.onbeforeunload = function (e) {
     if(startSession){
       paint.quitSessionServeur(current_id);
-    }
-    e = e || window.event;
+      
+      e = e || window.event;
 
-    // For IE and Firefox prior to version 4
-    if (e) {
-      e.returnValue = 'Quit';
-    }
+      // For IE and Firefox prior to version 4
+      if (e) {
+        e.returnValue = 'Quit';
+      }
 
-    // For Chrome, Safari and Opera 12+
-    return 'Quit';
+      // For Chrome, Safari and Opera 12+
+      return 'Quit';
+    }
   };
+
+  konami = new Konami()
+  konami.code = create_tri_force
+
+  konami.load()
 });
