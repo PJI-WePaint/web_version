@@ -238,6 +238,7 @@ function change_color_object(id, code_color, id_user){
 
 function create_tri_force(){
   if(startSession){
+    paper_paint.text(400, 150, "Awesoooome !!!").attr({"font-size": 40, "font-family": "arial", fill: "#C30000"});;
     add_element("triangle", null, false);
     move_object(id_element, 278, 251, false);
     change_color_object(id_element,"#FFFC00");
